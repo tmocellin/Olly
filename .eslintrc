@@ -1,5 +1,23 @@
 {
   "parser": "babel-eslint",
   "extends": "airbnb",
-  "plugins": ["react", "jsx-a11y", "import"]
+  "plugins": ["react", "jsx-a11y", "import"],
+  "rules": {
+    "linebreak-style": [
+      "error"
+      //"windows"
+    ],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js", ".jsx"]
+      }
+    ],
+    "no-use-before-define": 0, // disallow use of variables before they are defined
+    "react/prop-types": 0,
+    "react/sort-comp": 0
+  },
+  "globals": {
+    "fetch": false
+  }
 }
