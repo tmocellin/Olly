@@ -10,7 +10,7 @@ I18n.translations = {
 };
 
 const AppString = {
-  olly_test: I18n.t('olly_test'),
+  search_password: I18n.t('search_password'),
 };
 
 export default AppString;

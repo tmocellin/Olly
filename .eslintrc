@@ -2,6 +2,13 @@
   "parser": "babel-eslint",
   "extends": "airbnb",
   "plugins": ["react", "jsx-a11y", "import"],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".android.js", ".ios.js"]
+      }
+    }
+  },
   "rules": {
     "linebreak-style": [
       "error"
