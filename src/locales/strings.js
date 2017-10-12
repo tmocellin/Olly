@@ -11,6 +11,9 @@ I18n.translations = {
 
 const AppString = {
   search_password: I18n.t('search_password'),
+  noPasswords: I18n.t('noPasswords'),
+  noResults: I18n.t('noResults'),
+  addPassword: I18n.t('addPassword'),
 };
 
 export default AppString;
