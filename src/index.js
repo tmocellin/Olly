@@ -7,14 +7,17 @@
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 import SearchBar from './components/SearchBar';
-import PasswordList from './components/PasswordList';
+import TextField from './components/TextField';
 
 export default class App extends Component {
+  state = {
+    name: '',
+  };
   render() {
     return (
       <View style={styles.container}>
         <SearchBar />
-        <PasswordList />
+        <TextField placeholder={'Site name'} value={this.state.name} returnKeyType="next" />
       </View>
     );
   }
