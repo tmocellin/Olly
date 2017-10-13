@@ -3,4 +3,6 @@ export default {
   noPasswords: 'You have no passwords yet',
   noResults: 'No password found',
   addPassword: 'Add new password',
+  search: 'Search',
+  close: 'Close',
 };

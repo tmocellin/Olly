@@ -14,6 +14,8 @@ const AppString = {
   noPasswords: I18n.t('noPasswords'),
   noResults: I18n.t('noResults'),
   addPassword: I18n.t('addPassword'),
+  search: I18n.t('search'),
+  close: I18n.t('close'),
 };
 
 export default AppString;
