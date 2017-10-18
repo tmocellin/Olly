@@ -15,6 +15,7 @@ type Props = {
   data: Array<Password>,
   onItemPress: (item: Password) => void,
   fromSearch: boolean,
+  emptyOnPress: () => void,
 };
 
 const defineContentInset = () => (Platform.OS === 'android' ? { bottom: 0 } : { bottom: 50 });
@@ -37,7 +38,9 @@ const PasswordList = (props: Props) => (
     keyExtractor={item => item.key}
     contentInset={defineContentInset()}
     automaticallyAdjustContentInsets={false}
-    ListEmptyComponent={<EmptyComponent fromSearch={props.fromSearch} />}
+    ListEmptyComponent={
+      <EmptyComponent fromSearch={props.fromSearch} onPress={props.emptyOnPress} />
+    }
   />
 );
 
@@ -48,6 +51,7 @@ PasswordList.defaultProps = {
   ],
   onItemPress: item => console.log(`item : ${item.name}`),
   fromSearch: false,
+  emptyOnPress: () => console.log('empty on press'),
 };
 
 export default PasswordList;

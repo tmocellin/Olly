@@ -1,7 +1,7 @@
 export default {
   search_password: 'Search for a password',
   noPasswords: 'You have no passwords yet',
-  noResults: 'No password found',
+  noResults: 'No matching results for your search',
   addPassword: 'Add new password',
   search: 'Search',
   close: 'Close',

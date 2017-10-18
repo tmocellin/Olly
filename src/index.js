@@ -6,11 +6,11 @@
 
 import { StackNavigator } from 'react-navigation';
 
-import UnlockScreen from './screens/Unlock';
+import PasswordsScreen from './screens/Passwords';
 
 const App = StackNavigator({
   Home: {
-    screen: UnlockScreen,
+    screen: PasswordsScreen,
     navigationOptions: ({ navigation }: Object) => ({
       title: 'Hello title',
       headerStyle: { backgroundColor: '#01D88D' },
