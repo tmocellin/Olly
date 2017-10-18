@@ -21,6 +21,7 @@ const AppString = {
   password: I18n.t('password'),
   confirmation: I18n.t('confirmation'),
   save: I18n.t('save'),
+  unlock: I18n.t('unlock'),
 };
 
 export default AppString;

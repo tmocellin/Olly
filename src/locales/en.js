@@ -12,4 +12,6 @@ export default {
   password: 'Password',
   confirmation: 'Password confirmation',
   save: 'Save',
+  // Unlock Screen
+  unlock: 'Unlock',
 };

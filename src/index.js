@@ -6,16 +6,16 @@
 
 import { StackNavigator } from 'react-navigation';
 
-import SetupScreen from './screens/Setup';
+import UnlockScreen from './screens/Unlock';
 
 const App = StackNavigator({
   Home: {
-    screen: SetupScreen,
+    screen: UnlockScreen,
     navigationOptions: ({ navigation }: Object) => ({
       title: 'Hello title',
       headerStyle: { backgroundColor: '#01D88D' },
       headerTintColor: 'white',
-      // header:null if we want to hide the default header
+      header: null, // if we want to hide the default header
     }),
   },
 });

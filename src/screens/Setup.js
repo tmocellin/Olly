@@ -82,7 +82,6 @@ const styles = PlateformStyleSheet({
   },
   submit: {
     width: 150,
-
     alignSelf: 'center',
   },
 });
