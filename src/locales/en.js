@@ -22,4 +22,10 @@ export default {
   deleteAllPasswords: 'Delete all passwords',
   delete: 'Delete',
   cancel: 'Cancel',
+  // Synchronization screen
+  synchInstruction: 'Before you can synchronize your data. You must log in in DropBox.',
+  login: 'Log in',
+  publish: 'Publish data',
+  pull: 'Download data',
+  deleteBackup: 'Delete backup',
 };

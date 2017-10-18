@@ -29,6 +29,11 @@ const AppString = {
   deleteAllPasswords: I18n.t('deleteAllPasswords'),
   delete: I18n.t('delete'),
   cancel: I18n.t('cancel'),
+  synchInstruction: I18n.t('synchInstruction'),
+  login: I18n.t('login'),
+  publish: I18n.t('publish'),
+  pull: I18n.t('pull'),
+  deleteBackup: I18n.t('deleteBackup'),
 };
 
 export default AppString;

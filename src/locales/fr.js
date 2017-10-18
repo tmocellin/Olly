@@ -22,4 +22,11 @@ export default {
   deleteAllPasswords: 'Supprimer tous les mots de passe',
   delete: 'Supprimer',
   cancel: 'Annuler',
+  // Synchronization screen
+  synchInstruction:
+    'Avant de pouvoir synchroniser vos données. Vous devez vous connecter à DropBox.',
+  login: 'Se connecter',
+  publish: 'Publier les données',
+  pull: 'Récupérer les données',
+  deleteBackup: 'Supprimer la sauvegarde',
 };

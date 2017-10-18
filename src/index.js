@@ -6,11 +6,11 @@
 
 import { StackNavigator } from 'react-navigation';
 
-import SettingsScreen from './screens/Settings';
+import SynchronizationScreen from './screens/Synchronization';
 
 const App = StackNavigator({
   Home: {
-    screen: SettingsScreen,
+    screen: SynchronizationScreen,
     navigationOptions: ({ navigation }: Object) => ({
       title: 'Hello title',
       headerStyle: { backgroundColor: '#01D88D' },
