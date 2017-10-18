@@ -5,4 +5,11 @@ export default {
   addPassword: 'Ajouter un mot de passe',
   search: 'Rechercher',
   close: 'Fermer',
+  // Setup screen ,
+  setup: 'Initialisation',
+  instructions:
+    'Pour utiliser Olly vous devez définir seulement un mot de passe. Vous devez le garder en sécurité car si vous le perdez vous ne pourrez pas restaurer vos données',
+  password: 'Mot de passe',
+  confirmation: 'Confirmation du mot de passe',
+  save: 'Enregistrer',
 };

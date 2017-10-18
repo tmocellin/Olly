@@ -16,6 +16,11 @@ const AppString = {
   addPassword: I18n.t('addPassword'),
   search: I18n.t('search'),
   close: I18n.t('close'),
+  setup: I18n.t('setup'),
+  instructions: I18n.t('instructions'),
+  password: I18n.t('password'),
+  confirmation: I18n.t('confirmation'),
+  save: I18n.t('save'),
 };
 
 export default AppString;
