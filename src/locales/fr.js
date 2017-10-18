@@ -14,4 +14,12 @@ export default {
   save: 'Enregistrer',
   // Unlock Screen
   unlock: 'Déverrouiller',
+  // Settings Screen
+  passwordAuto: 'Génération automatique',
+  clear: 'Supprimer les données',
+  clearConfirmation: "Êtes-vous sûr de vouloir supprimer l'intégralité des mots de passe ?",
+  passwordLength: 'Longeur du mot de passe',
+  deleteAllPasswords: 'Supprimer tous les mots de passe',
+  delete: 'Supprimer',
+  cancel: 'Annuler',
 };

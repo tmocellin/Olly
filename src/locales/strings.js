@@ -22,6 +22,13 @@ const AppString = {
   confirmation: I18n.t('confirmation'),
   save: I18n.t('save'),
   unlock: I18n.t('unlock'),
+  passwordAuto: I18n.t('passwordAuto'),
+  clear: I18n.t('clear'),
+  clearConfirmation: I18n.t('clearConfirmation'),
+  passwordLength: I18n.t('passwordLength'),
+  deleteAllPasswords: I18n.t('deleteAllPasswords'),
+  delete: I18n.t('delete'),
+  cancel: I18n.t('cancel'),
 };
 
 export default AppString;

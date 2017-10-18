@@ -14,4 +14,12 @@ export default {
   save: 'Save',
   // Unlock Screen
   unlock: 'Unlock',
+  // Settings screen
+  passwordAuto: 'Automatic generation',
+  clear: 'Clear data',
+  clearConfirmation: 'Are you sure you want to delete all passwords ?',
+  passwordLength: 'Password length',
+  deleteAllPasswords: 'Delete all passwords',
+  delete: 'Delete',
+  cancel: 'Cancel',
 };
