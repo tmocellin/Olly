@@ -96,7 +96,7 @@ class PassworsScreen extends Component<void, void, State> {
           openMenu={() => this.openMenu()}
         />
         <PasswordList
-          data={[]}
+          data={searchResults}
           onItemPress={item => this.showPassword(item)}
           fromSearch={searchValue.length > 0}
           emptyOnPress={() => this.addNewItem()}
