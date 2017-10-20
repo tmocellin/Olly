@@ -60,8 +60,8 @@ class IconModal extends Component<Props, Props, State> {
     this.animateModal(nextProps.isOpen);
   }
 
-  animateModal(isOpen: boolean) {
-    const toValue = isOpen ? 0 : 1;
+  animateModal(open: boolean) {
+    const toValue = open ? 1 : 0;
     Animated.timing(this.animatedValue, {
       toValue,
       duration: 200,

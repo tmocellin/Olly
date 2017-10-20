@@ -28,4 +28,10 @@ export default {
   publish: 'Publish data',
   pull: 'Download data',
   deleteBackup: 'Delete backup',
+  // Edition
+  siteName: 'Site Name',
+  siteUrl: 'Site url',
+  userName: 'Login',
+  edit: 'Edit',
+  copy: 'Copy password',
 };

@@ -29,4 +29,10 @@ export default {
   publish: 'Publier les données',
   pull: 'Récupérer les données',
   deleteBackup: 'Supprimer la sauvegarde',
+  // Edition
+  siteName: 'Nom du site',
+  siteUrl: 'Url du site',
+  userName: 'Login',
+  edit: 'Editer',
+  copy: 'Copier le mot de passe',
 };

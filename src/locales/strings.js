@@ -34,6 +34,11 @@ const AppString = {
   publish: I18n.t('publish'),
   pull: I18n.t('pull'),
   deleteBackup: I18n.t('deleteBackup'),
+  siteName: I18n.t('siteName'),
+  siteUrl: I18n.t('siteUrl'),
+  userName: I18n.t('userName'),
+  edit: I18n.t('edit'),
+  copy: I18n.t('copy'),
 };
 
 export default AppString;
