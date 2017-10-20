@@ -39,6 +39,12 @@ const AppString = {
   userName: I18n.t('userName'),
   edit: I18n.t('edit'),
   copy: I18n.t('copy'),
+  generate: I18n.t('generate'),
+  settings: I18n.t('settings'),
+  passwordList: I18n.t('passwordList'),
+  synchronization: I18n.t('synchronization'),
+  edition: I18n.t('edition'),
+  creation: I18n.t('creation'),
 };
 
 export default AppString;

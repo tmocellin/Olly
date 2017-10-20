@@ -15,6 +15,7 @@ import ColorSelector from '../components/ColorSelector';
 import strings from '../locales/strings';
 import { IOS_BACKGROUND, WHITE, PRIMARY } from '../constants/colors';
 import { ANDROID_MARGIN, IOS_MARGIN } from '../constants/dimensions';
+import NavBar from '../components/NavBar';
 
 type State = {
   key: string,
@@ -73,9 +74,19 @@ class ReadOnlyScreen extends Component<void, void, State> {
 
   render() {
     const { icon, color, name, password, login, url, modalIsOpen } = this.state;
-
     return (
       <View style={styles.main}>
+        <NavBar
+          title={strings.edition}
+          needIconLeft
+          needIconRight
+          actionLeft={() => this.props.navigation.goBack()}
+          actionRight={() => this.generatePassword()}
+          iconLeft="arrow-back"
+          onActionSelected={() => this.generatePassword()}
+          toolbarActions={[{ title: strings.generate, iconName: 'md-refresh', show: 'always' }]}
+        />
+
         <KeyboardAwareScrollView style={styles.scrollContent}>
           <View style={styles.container}>
             <View style={styles.iconCtnr}>
@@ -133,10 +144,6 @@ class ReadOnlyScreen extends Component<void, void, State> {
           </View>
         </KeyboardAwareScrollView>
 
-        <TouchableOpacity style={styles.generate} onPress={() => this.generatePassword()}>
-          <Icon name="magic" size={32} color={PRIMARY} />
-        </TouchableOpacity>
-
         <IconModal
           onSelectIcon={iconName => this.selectIcon(iconName)}
           isOpen={modalIsOpen}
@@ -156,23 +163,6 @@ const styles = PlateformStyleSheet({
   scrollContent: {
     flex: 1,
     backgroundColor: IOS_BACKGROUND,
-  },
-  generate: {
-    android: {
-      top: ANDROID_MARGIN,
-      padding: ANDROID_MARGIN,
-    },
-    ios: {
-      top: 42,
-      padding: IOS_MARGIN,
-    },
-    height: 60,
-    width: 60,
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'absolute',
-    right: ANDROID_MARGIN,
-    backgroundColor: WHITE,
   },
   container: {
     backgroundColor: WHITE,

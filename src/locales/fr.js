@@ -35,4 +35,11 @@ export default {
   userName: 'Login',
   edit: 'Editer',
   copy: 'Copier le mot de passe',
+  generate: 'Générer un mot de passe',
+  // screen title
+  settings: 'Réglages',
+  passwordList: 'Mots de passe',
+  synchronization: 'Synchronisation',
+  edition: 'Edition',
+  creation: 'Ajouter un mot de passe',
 };

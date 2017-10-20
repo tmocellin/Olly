@@ -18,8 +18,6 @@ type Props = {
   emptyOnPress: () => void,
 };
 
-const defineContentInset = () => (Platform.OS === 'android' ? { bottom: 0 } : { bottom: 50 });
-
 const renderItem = (item: Password, onPress: () => void) => (
   <PasswordItem
     dimension={dimension}
@@ -36,7 +34,6 @@ const PasswordList = (props: Props) => (
     data={props.data}
     renderItem={({ item }) => renderItem(item, () => props.onItemPress(item))}
     keyExtractor={item => item.key}
-    contentInset={defineContentInset()}
     automaticallyAdjustContentInsets={false}
     ListEmptyComponent={
       <EmptyComponent fromSearch={props.fromSearch} onPress={props.emptyOnPress} />

@@ -6,16 +6,18 @@
 
 import { StackNavigator } from 'react-navigation';
 
+import React, { Component } from 'react';
+import { Button } from 'react-native';
 import EditScreen from './screens/Edit';
 
 const App = StackNavigator({
-  Home: {
+  Edit: {
     screen: EditScreen,
     navigationOptions: ({ navigation }: Object) => ({
-      title: 'Hello title',
+      title: 'Title',
       headerStyle: { backgroundColor: '#01D88D' },
       headerTintColor: 'white',
-      // header: null, // if we want to hide the default header
+      header: null,
     }),
   },
 });

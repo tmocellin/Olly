@@ -34,4 +34,11 @@ export default {
   userName: 'Login',
   edit: 'Edit',
   copy: 'Copy password',
+  generate: 'Generate password',
+  // screen title
+  settings: 'Settings',
+  passwordList: 'Passwords',
+  synchronization: 'Synchronization',
+  edition: 'Edition',
+  creation: 'Add a new password',
 };
