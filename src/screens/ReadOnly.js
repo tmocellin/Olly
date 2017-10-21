@@ -33,9 +33,7 @@ class ReadOnlyScreen extends Component<void, void, State> {
   };
 
   editPassword() {
-    console.log('====================================');
-    console.log('edit password');
-    console.log('====================================');
+    this.props.navigation.navigate('Edit');
   }
 
   copyPassword() {
@@ -66,29 +64,14 @@ class ReadOnlyScreen extends Component<void, void, State> {
           <ReadOnlyRow label={strings.password} value={password} />
 
           <View style={styles.actionContainer}>
-            <TouchableOpacity style={styles.action}>
-              <Text
-                style={[styles.actionLabel, { color: '#647CF6' }]}
-                onPress={() => this.copyPassword()}
-              >
-                {strings.copy}
-              </Text>
+            <TouchableOpacity style={styles.action} onPress={() => this.copyPassword()}>
+              <Text style={[styles.actionLabel, { color: '#647CF6' }]}>{strings.copy}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.action}>
-              <Text
-                style={[styles.actionLabel, { color: PRIMARY }]}
-                onPress={() => this.editPassword()}
-              >
-                {strings.edit}
-              </Text>
+            <TouchableOpacity style={styles.action} onPress={() => this.editPassword()}>
+              <Text style={[styles.actionLabel, { color: PRIMARY }]}>{strings.edit}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.action}>
-              <Text
-                style={[styles.actionLabel, { color: DELETE_COLOR }]}
-                onPress={() => this.deletePassword()}
-              >
-                {strings.delete}
-              </Text>
+            <TouchableOpacity style={styles.action} onPress={() => this.deletePassword()}>
+              <Text style={[styles.actionLabel, { color: DELETE_COLOR }]}>{strings.delete}</Text>
             </TouchableOpacity>
           </View>
         </View>

@@ -24,6 +24,8 @@ export default class SetupScreen extends Component<void, void, State> {
     console.log('====================================');
     console.log(`mot de passe : ${this.state.password}`);
     console.log('====================================');
+
+    this.props.navigation.navigate('App');
   }
 
   render() {

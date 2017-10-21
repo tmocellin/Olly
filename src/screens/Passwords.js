@@ -40,9 +40,7 @@ class PassworsScreen extends Component<void, void, State> {
   };
 
   showPassword(password: Password) {
-    console.log('====================================');
-    console.log(JSON.stringify(password));
-    console.log('====================================');
+    this.props.navigation.navigate('ReadOnly', { siteName: password.name });
   }
 
   searchPassword(search: string) {
@@ -63,9 +61,7 @@ class PassworsScreen extends Component<void, void, State> {
   }
 
   addNewItem() {
-    console.log('====================================');
-    console.log('add new item');
-    console.log('====================================');
+    this.props.navigation.navigate('Edit');
   }
 
   openMenu() {

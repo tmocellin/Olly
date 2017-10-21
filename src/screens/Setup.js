@@ -9,6 +9,7 @@ import { PlateformStyleSheet } from '../common/PlatformHelper';
 import { ANDROID_MARGIN, IOS_MARGIN } from '../constants/dimensions';
 import { PRIMARY_TEXT, DELETE_COLOR, PRIMARY, WHITE } from '../constants/colors';
 import strings from '../locales/strings';
+import { NavigationActions } from 'react-navigation';
 
 type State = {
   password: string,
@@ -27,6 +28,12 @@ export default class SetupScreen extends Component<void, void, State> {
     console.log('====================================');
     console.log(`password : ${password} confirmation : ${confirmation}`);
     console.log('====================================');
+
+    const resetAction = NavigationActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName: 'Unlock' })],
+    });
+    this.props.navigation.dispatch(resetAction);
   }
 
   render() {

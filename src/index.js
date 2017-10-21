@@ -14,7 +14,7 @@ import SetupScreen from './screens/Setup';
 import ReadOnlyScreen from './screens/ReadOnly';
 import EditScreen from './screens/Edit';
 
-const NestedNav = Platform.OS === 'Android' ? DrawerNavigator : TabNavigator;
+const NestedNav = Platform.OS === 'android' ? DrawerNavigator : TabNavigator;
 
 const App = StackNavigator({
   Setup: {
