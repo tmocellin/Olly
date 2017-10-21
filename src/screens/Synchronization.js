@@ -30,7 +30,10 @@ export default class SynchronizationScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <NavBar title={strings.synchronization} />
+        <NavBar
+          title={strings.synchronization}
+          actionLeft={() => this.props.navigation.navigate('DrawerOpen')}
+        />
         <SettingRow
           label={strings.publish}
           iconName="cloud-upload"

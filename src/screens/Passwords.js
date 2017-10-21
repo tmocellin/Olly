@@ -69,9 +69,7 @@ class PassworsScreen extends Component<void, void, State> {
   }
 
   openMenu() {
-    console.log('====================================');
-    console.log('open drawer');
-    console.log('====================================');
+    this.props.navigation.navigate('DrawerOpen');
   }
 
   renderActionButton() {

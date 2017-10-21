@@ -16,7 +16,10 @@ export default class InitSynchronizationScreen extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <NavBar title={strings.synchronization} />
+        <NavBar
+          title={strings.synchronization}
+          actionLeft={() => this.props.navigation.navigate('DrawerOpen')}
+        />
         <ScrollView contentContainerStyle={styles.container}>
           <Image style={styles.image} source={image} />
           <Text style={styles.title}>{strings.synchInstruction}</Text>

@@ -48,7 +48,10 @@ class SettingsScreen extends Component<void, void, State> {
   render() {
     return (
       <View style={styles.container}>
-        <NavBar title={strings.settings} />
+        <NavBar
+          title={strings.settings}
+          actionLeft={() => this.props.navigation.navigate('DrawerOpen')}
+        />
         <SliderRow
           label={strings.passwordLength}
           onValueChange={value => this.setPasswordLength(value)}

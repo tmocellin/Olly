@@ -4,6 +4,6 @@
  * @flow
  */
 
-import TabNavigator from './screens/TabNavigator';
+import DrawerNavigator from './screens/DrawerNavigator';
 
-export default TabNavigator;
+export default DrawerNavigator;
