@@ -4,22 +4,6 @@
  * @flow
  */
 
-import { StackNavigator } from 'react-navigation';
+import TabNavigator from './screens/TabNavigator';
 
-import React, { Component } from 'react';
-import { Button } from 'react-native';
-import EditScreen from './screens/Edit';
-
-const App = StackNavigator({
-  Edit: {
-    screen: EditScreen,
-    navigationOptions: ({ navigation }: Object) => ({
-      title: 'Title',
-      headerStyle: { backgroundColor: '#01D88D' },
-      headerTintColor: 'white',
-      header: null,
-    }),
-  },
-});
-
-export default App;
+export default TabNavigator;
