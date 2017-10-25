@@ -4,21 +4,40 @@
 
 import React, { Component } from 'react';
 import { ScrollView, View, Image, Button, Text } from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { NavigationActions } from 'react-navigation';
 import { PlateformStyleSheet } from '../common/PlatformHelper';
 import TextField from '../components/TextField';
 import strings from '../locales/strings';
 import { ANDROID_MARGIN, IOS_MARGIN } from '../constants/dimensions';
 import { PRIMARY, WHITE, DELETE_COLOR } from '../constants/colors';
+import type { ReduxState } from '../reducers/types';
+
+const image = require('../img/book.png');
 
 type State = {
   password: string,
 };
-const image = require('../img/book.png');
+type Props = {
+  navigation: Object,
+  appInitialized: boolean,
+};
 
-export default class SetupScreen extends Component<void, void, State> {
+class UnlockScreen extends Component<void, Props, State> {
   state = {
     password: '',
   };
+
+  componentWillMount() {
+    if (!this.props.appInitialized) {
+      const resetAction = NavigationActions.reset({
+        index: 0,
+        actions: [NavigationActions.navigate({ routeName: 'Setup' })],
+      });
+      this.props.navigation.dispatch(resetAction);
+    }
+  }
 
   submit() {
     console.log('====================================');
@@ -47,6 +66,16 @@ export default class SetupScreen extends Component<void, void, State> {
     );
   }
 }
+
+function mapStateToProps(state: ReduxState) {
+  return {
+    appInitialized: state.user.appInitialized,
+  };
+}
+export default connect(mapStateToProps, dispatch => ({
+  actions: bindActionCreators({}, dispatch),
+}))(UnlockScreen);
+
 const styles = PlateformStyleSheet({
   container: {
     flex: 1,

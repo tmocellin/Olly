@@ -42,4 +42,6 @@ export default {
   synchronization: 'Synchronisation',
   edition: 'Edition',
   creation: 'Ajouter un mot de passe',
+  confirmationError: 'Votre mot de passe et la confirmation ne sont pas identiques',
+  passwordLenghtError: 'Vous devez saisir le mot de passe et la confirmation',
 };

@@ -41,4 +41,6 @@ export default {
   synchronization: 'Synchronization',
   edition: 'Edition',
   creation: 'Add a new password',
+  confirmationError: 'Your password and confirmation are not the same',
+  passwordLenghtError: 'You need to define a password and the confirmation',
 };

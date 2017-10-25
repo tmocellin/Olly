@@ -22,6 +22,28 @@ export type SetAutoGenerationAction = {
   autoGeneration: boolean,
 };
 
+/*
+**************
+* Initialization
+**************
+*/
+
+export type InitializationSuccessAction = {
+  type: 'INITIALIZATION_SUCCESS',
+  salt: string,
+  iv: string,
+  verificationToken: string,
+};
+
+export type InitializationFailAction = {
+  type: 'INITIALIZATION_FAIL',
+  error: string,
+};
+
 export type Action =
   /** *** Settings **** */
-  SetPasswordLengthAction | SetAutoGenerationAction;
+  | SetPasswordLengthAction
+  | SetAutoGenerationAction
+  /** *** Initialization **** */
+  | InitializationSuccessAction
+  | InitializationFailAction;

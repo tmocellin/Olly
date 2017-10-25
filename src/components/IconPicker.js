@@ -38,7 +38,7 @@ const IconPicker = (props: Props) => {
 IconPicker.defaultProps = {
   color: PRIMARY,
   icon: 'cubes',
-  onPress: console.log('onpress'),
+  onPress: () => console.log('onpress'),
 };
 
 export default IconPicker;

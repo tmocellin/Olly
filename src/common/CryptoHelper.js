@@ -48,7 +48,7 @@ type CryptoParams = {
   verificationToken: string,
 };
 
-export const IntializeData = (password: string): CryptoParams => {
+export const InitializeData = (password: string): CryptoParams => {
   const salt = CryptoJS.lib.WordArray.random(128 / 8);
   const iv = CryptoJS.lib.WordArray.random(128 / 8);
   const key = GenerateKey(password, salt.toString());

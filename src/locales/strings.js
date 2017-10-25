@@ -45,6 +45,8 @@ const AppString = {
   synchronization: I18n.t('synchronization'),
   edition: I18n.t('edition'),
   creation: I18n.t('creation'),
+  confirmationError: I18n.t('confirmationError'),
+  passwordLenghtError: I18n.t('passwordLenghtError'),
 };
 
 export default AppString;
