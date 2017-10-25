@@ -1,3 +1,7 @@
+/*
+* @flow
+*/
+
 export type Password = {
   key: string,
   name: string,
