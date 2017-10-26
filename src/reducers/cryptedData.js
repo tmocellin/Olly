@@ -9,7 +9,7 @@ const initialState: CryptedDataState = {
   passwords: '',
 };
 
-const settingsState = (
+const cryptedDataState = (
   state: CryptedDataState = initialState,
   action: Action,
 ): CryptedDataState => {
@@ -17,11 +17,11 @@ const settingsState = (
     case 'UPDATE_CRYPTED_PASSWORDS':
       return {
         ...state,
-        passwords: action.passwords,
+        passwords: action.cryptedPassword,
       };
     default:
       return state;
   }
 };
 
-export default settingsState;
+export default cryptedDataState;

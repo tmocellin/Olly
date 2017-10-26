@@ -7,9 +7,10 @@ import type {
   Dispatch,
   InitializationFailAction,
   InitializationSuccessAction,
+  UpdateCryptedPasswordsAction,
 } from './types';
 import strings from '../locales/strings';
-import { InitializeData } from '../common/CryptoHelper';
+import { InitializeData, Encrypt } from '../common/CryptoHelper';
 
 /*
 *** Actions ***
@@ -26,7 +27,11 @@ const initializeApplication = (
     dispatch(initializationFail(strings.confirmationError));
   } else {
     const data = InitializeData(password);
+    const emptyPassword = JSON.stringify({ allIds: [], byId: {} });
+    const cryptedEmptyPasswords = Encrypt(emptyPassword, data.key, data.iv);
+
     dispatch(initializationSuccess(data.salt, data.iv, data.verificationToken));
+    dispatch(updateCryptedPasswords(cryptedEmptyPasswords));
     resetRoute();
   }
 };
@@ -49,4 +54,9 @@ const initializationSuccess = (
 const initializationFail = (error: string): InitializationFailAction => ({
   type: 'INITIALIZATION_FAIL',
   error,
+});
+
+const updateCryptedPasswords = (cryptedPassword: strings): UpdateCryptedPasswordsAction => ({
+  type: 'UPDATE_CRYPTED_PASSWORDS',
+  cryptedPassword,
 });

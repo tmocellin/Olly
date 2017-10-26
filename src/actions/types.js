@@ -1,6 +1,7 @@
 /**
  * @flow
  */
+import type { NormalizedState } from '../types/NormalizedState';
 
 export type Dispatch = (action: Action | ThunkAction | Array<Action>) => any;
 export type GetState = () => Object;
@@ -51,6 +52,12 @@ export type UpdateCryptedPasswordsAction = {
   cryptedPassword: string,
 };
 
+export type UnlockAppAction = {
+  type: 'UNLOCK_APP',
+  passwords: NormalizedState,
+  key: string,
+};
+
 export type Action =
   /** *** Settings **** */
   | SetPasswordLengthAction
@@ -59,4 +66,5 @@ export type Action =
   | InitializationSuccessAction
   | InitializationFailAction
   /** *** Passwords **** */
-  | UpdateCryptedPasswordsAction;
+  | UpdateCryptedPasswordsAction
+  | UnlockAppAction;

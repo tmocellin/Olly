@@ -4,5 +4,5 @@
 
 export type NormalizedState = {
   byId: Object,
-  allIds: Array<number>,
+  allIds: Array<string>,
 };

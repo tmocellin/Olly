@@ -19,7 +19,7 @@ export const IsValidPassword = (
   return currentToken.toString() === verificationToken;
 };
 
-export const Encrypt = (data: string, key: CryptoJS.WordArray, iv: string): string => {
+export const Encrypt = (data: string, key: string, iv: string): string => {
   const parsedIv = CryptoJS.enc.Hex.parse(iv);
   const encrypted = CryptoJS.AES.encrypt(data, key, {
     parsedIv,
@@ -29,7 +29,7 @@ export const Encrypt = (data: string, key: CryptoJS.WordArray, iv: string): stri
   return encrypted.ciphertext.toString();
 };
 
-export const Decrypt = (data: string, key: CryptoJS.WordArray, iv: string) => {
+export const Decrypt = (data: string, key: string, iv: string) => {
   const parsedIv = CryptoJS.enc.Hex.parse(iv);
   const cipherStuff = CryptoJS.lib.CipherParams.create({
     key,
@@ -44,7 +44,7 @@ export const Decrypt = (data: string, key: CryptoJS.WordArray, iv: string) => {
 type CryptoParams = {
   salt: string,
   iv: string,
-  key: CryptoJS.WordArray,
+  key: string,
   verificationToken: string,
 };
 
@@ -57,7 +57,7 @@ export const InitializeData = (password: string): CryptoParams => {
   return {
     salt: salt.toString(),
     iv: iv.toString(),
-    key,
+    key: key.toString(),
     verificationToken: verificationToken.toString(),
   };
 };
