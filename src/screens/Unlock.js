@@ -3,7 +3,7 @@
 */
 
 import React, { Component } from 'react';
-import { ScrollView, View, Image, Button, Text, AsyncStorage } from 'react-native';
+import { ScrollView, View, Image, Button, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { NavigationActions } from 'react-navigation';

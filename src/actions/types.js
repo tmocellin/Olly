@@ -1,6 +1,7 @@
 /**
  * @flow
  */
+import CryptoJS from 'crypto-js';
 import type { NormalizedState } from '../types/NormalizedState';
 
 export type Dispatch = (action: Action | ThunkAction | Array<Action>) => any;
@@ -55,7 +56,7 @@ export type UpdateCryptedPasswordsAction = {
 export type UnlockAppAction = {
   type: 'UNLOCK_APP',
   passwords: NormalizedState,
-  key: string,
+  key: CryptoJS.WordArray,
 };
 
 export type UnlockAppFailAction = {

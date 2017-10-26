@@ -2,6 +2,7 @@
 * @flow
 */
 import type { NormalizedState } from '../types/NormalizedState';
+import CryptoJS from 'crypto-js';
 
 export type SettingsState = {
   +passwordLength: number,
@@ -17,7 +18,7 @@ export type UserState = {
 };
 
 export type DataState = {
-  +key: string,
+  +key: CryptoJS.WordArray,
   +passwords: NormalizedState,
   +error: string,
 };

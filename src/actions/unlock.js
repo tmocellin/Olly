@@ -21,8 +21,8 @@ const unlockApp = (
 ): ThunkAction => (dispatch: Dispatch) => {
   if (IsValidPassword(verificationToken, password, salt)) {
     const key = GenerateKey(password, salt);
-    const passwords = Decrypt(cryptedPasswords, key.toString(), iv);
-    dispatch(unlockApplication(key.toString(), JSON.parse(passwords)));
+    const passwords = Decrypt(cryptedPasswords, key, iv);
+    dispatch(unlockApplication(key, JSON.parse(passwords)));
     resetRoute();
   } else {
     dispatch(unlockAppFail(strings.invalid_password));
