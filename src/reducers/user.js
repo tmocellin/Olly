@@ -13,7 +13,7 @@ const initialState: UserState = {
   error: '',
 };
 
-const settingsState = (state: UserState = initialState, action: Action): UserState => {
+const userState = (state: UserState = initialState, action: Action): UserState => {
   switch (action.type) {
     case 'INITIALIZATION_SUCCESS':
       return {
@@ -31,4 +31,4 @@ const settingsState = (state: UserState = initialState, action: Action): UserSta
   }
 };
 
-export default settingsState;
+export default userState;

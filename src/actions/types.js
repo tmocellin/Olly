@@ -40,10 +40,23 @@ export type InitializationFailAction = {
   error: string,
 };
 
+/*
+**************
+* Passwords
+**************
+*/
+
+export type UpdateCryptedPasswordsAction = {
+  type: 'UPDATE_CRYPTED_PASSWORDS',
+  cryptedPassword: string,
+};
+
 export type Action =
   /** *** Settings **** */
   | SetPasswordLengthAction
   | SetAutoGenerationAction
   /** *** Initialization **** */
   | InitializationSuccessAction
-  | InitializationFailAction;
+  | InitializationFailAction
+  /** *** Passwords **** */
+  | UpdateCryptedPasswordsAction;

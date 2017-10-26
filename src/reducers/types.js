@@ -1,6 +1,7 @@
 /*
 * @flow
 */
+import type { NormalizedState } from '../types/NormalizedState';
 
 export type SettingsState = {
   +passwordLength: number,
@@ -15,7 +16,18 @@ export type UserState = {
   +error: string,
 };
 
+export type DataState = {
+  +key: string,
+  +passwords: NormalizedState,
+};
+
+export type CryptedDataState = {
+  +passwords: string,
+};
+
 export type ReduxState = {
   +settings: SettingsState,
   +user: UserState,
+  +data: DataState,
+  +cryptedData: CryptedDataState,
 };
