@@ -58,6 +58,11 @@ export type UnlockAppAction = {
   key: string,
 };
 
+export type UnlockAppFailAction = {
+  type: 'UNLOCK_APP_FAIL',
+  error: string,
+};
+
 export type Action =
   /** *** Settings **** */
   | SetPasswordLengthAction
@@ -67,4 +72,5 @@ export type Action =
   | InitializationFailAction
   /** *** Passwords **** */
   | UpdateCryptedPasswordsAction
-  | UnlockAppAction;
+  | UnlockAppAction
+  | UnlockAppFailAction;

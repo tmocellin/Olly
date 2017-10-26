@@ -8,6 +8,7 @@ import type { DataState } from './types';
 const initialState: DataState = {
   passwords: { allIds: [], byId: {} },
   key: '',
+  error: '',
 };
 
 const dataState = (state: DataState = initialState, action: Action): DataState => {
@@ -17,6 +18,12 @@ const dataState = (state: DataState = initialState, action: Action): DataState =
         ...state,
         passwords: action.passwords,
         key: action.key,
+        error: '',
+      };
+    case 'UNLOCK_APP_FAIL':
+      return {
+        ...state,
+        error: action.error,
       };
     default:
       return state;

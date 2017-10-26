@@ -19,6 +19,7 @@ export type UserState = {
 export type DataState = {
   +key: string,
   +passwords: NormalizedState,
+  +error: string,
 };
 
 export type CryptedDataState = {

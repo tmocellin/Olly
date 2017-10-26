@@ -47,6 +47,7 @@ const AppString = {
   creation: I18n.t('creation'),
   confirmationError: I18n.t('confirmationError'),
   passwordLenghtError: I18n.t('passwordLenghtError'),
+  invalid_password: I18n.t('invalid_password'),
 };
 
 export default AppString;

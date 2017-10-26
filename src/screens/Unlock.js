@@ -13,6 +13,7 @@ import strings from '../locales/strings';
 import { ANDROID_MARGIN, IOS_MARGIN } from '../constants/dimensions';
 import { PRIMARY, WHITE, DELETE_COLOR } from '../constants/colors';
 import type { ReduxState } from '../reducers/types';
+import unlockApp from '../actions/unlock';
 
 const image = require('../img/book.png');
 
@@ -21,7 +22,13 @@ type State = {
 };
 type Props = {
   navigation: Object,
+  actions: Object,
   appInitialized: boolean,
+  cryptedPasswords: string,
+  verificationToken: string,
+  salt: string,
+  iv: string,
+  error: string,
 };
 
 class UnlockScreen extends Component<void, Props, State> {
@@ -40,11 +47,19 @@ class UnlockScreen extends Component<void, Props, State> {
   }
 
   submit() {
-    console.log('====================================');
-    console.log(`mot de passe : ${this.state.password}`);
-    console.log('====================================');
-    AsyncStorage.clear();
-    // this.props.navigation.navigate('App');
+    const resetAction = NavigationActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName: 'App' })],
+    });
+    const reset = () => this.props.navigation.dispatch(resetAction);
+    this.props.actions.unlockApp(
+      this.state.password,
+      this.props.verificationToken,
+      this.props.salt,
+      this.props.iv,
+      this.props.cryptedPasswords,
+      reset,
+    );
   }
 
   render() {
@@ -58,7 +73,7 @@ class UnlockScreen extends Component<void, Props, State> {
           value={this.state.password}
           onChangeText={text => this.setState({ password: text })}
         />
-        <Text style={styles.error}> Ce texte sera remplacer lorsqu'on ajoutera redux</Text>
+        <Text style={styles.error}> {this.props.error}</Text>
         <View style={styles.submit}>
           <Button title={strings.unlock} color={PRIMARY} onPress={() => this.submit()} />
         </View>
@@ -70,10 +85,15 @@ class UnlockScreen extends Component<void, Props, State> {
 function mapStateToProps(state: ReduxState) {
   return {
     appInitialized: state.user.appInitialized,
+    cryptedPasswords: state.cryptedData.passwords,
+    verificationToken: state.user.verificationToken,
+    salt: state.user.salt,
+    iv: state.user.iv,
+    error: state.data.error,
   };
 }
 export default connect(mapStateToProps, dispatch => ({
-  actions: bindActionCreators({}, dispatch),
+  actions: bindActionCreators({ unlockApp }, dispatch),
 }))(UnlockScreen);
 
 const styles = PlateformStyleSheet({
