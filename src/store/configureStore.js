@@ -8,6 +8,7 @@ import rootReducer from '../reducers';
 const config = {
   key: 'root', // key is required
   storage, // storage is now required
+  blacklist: ['data'],
 };
 
 const reducer = persistReducer(config, rootReducer);
