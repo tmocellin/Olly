@@ -6,8 +6,10 @@ import React, { Component } from 'react';
 import { View, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import CryptoJS from 'crypto-js';
 import type { ReduxState } from '../reducers/types';
 import * as SettingsActions from '../actions/settings';
+import { DeleteAllPasswords } from '../actions/passwords';
 import { PlateformStyleSheet } from '../common/PlatformHelper';
 import SettingRow from '../components/SettingRow';
 import SliderRow from '../components/SliderRow';
@@ -21,15 +23,18 @@ type Props = {
   autoGeneration: boolean,
   navigation: Object,
   actions: Object,
+  iv: string,
+  cryptoKey: CryptoJS.WordArray,
 };
 
 class SettingsScreen extends Component<void, Props, void> {
   deleteAllPasswords() {
+    const { iv, cryptoKey } = this.props;
     Alert.alert(strings.clear, strings.clearConfirmation, [
       { text: strings.cancel, style: 'cancel' },
       {
         text: strings.delete,
-        onPress: () => console.log('all password delete'),
+        onPress: () => this.props.actions.DeleteAllPasswords(cryptoKey, iv),
       },
     ]);
   }
@@ -70,10 +75,12 @@ function mapStateToProps(state: ReduxState) {
   return {
     passwordLength: state.settings.passwordLength,
     autoGeneration: state.settings.autoGeneration,
+    cryptoKey: state.data.key,
+    iv: state.user.iv,
   };
 }
 export default connect(mapStateToProps, dispatch => ({
-  actions: bindActionCreators(SettingsActions, dispatch),
+  actions: bindActionCreators({ ...{}, ...{ DeleteAllPasswords }, ...SettingsActions }, dispatch),
 }))(SettingsScreen);
 
 const styles = PlateformStyleSheet({
