@@ -3,10 +3,17 @@
 */
 
 import React, { Component } from 'react';
-import { View, Button, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { View, Button } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import uuidV4 from 'uuid/v4';
+import CryptoJS from 'crypto-js';
+import type { ReduxState } from '../reducers/types';
+import { GeneratePassword } from '../common/PasswordHelper';
+import type { Password } from '../types/Password';
+import type { NormalizedState } from '../types/NormalizedState';
+import * as PasswordActions from '../actions/passwords';
 import { PlateformStyleSheet } from '../common/PlatformHelper';
 import TextField from '../components/TextField';
 import IconPicker from '../components/IconPicker';
@@ -28,32 +35,71 @@ type State = {
   modalIsOpen: boolean,
 };
 
-class ReadOnlyScreen extends Component<void, void, State> {
+type Props = {
+  edition: boolean,
+  password: Password,
+  passwordLength: number,
+  autoGeneration: boolean,
+  navigation: Object,
+  actions: Object,
+  cryptoKey: CryptoJS.WordArray,
+  iv: string,
+  passwords: NormalizedState,
+};
+
+class ReadOnlyScreen extends Component<void, Props, State> {
   loginField: Object;
   urlField: Object;
   passwordField: Object;
 
   state = {
-    key: '9939diz-cd',
-    name: 'Facebook',
-    color: '#64A1F6',
-    password: 'poekfpOKOEOFE398045:=:kOZ',
-    icon: 'facebook',
-    login: 'someuse@gmail.com',
-    url: 'https://www.facebook.com/',
+    key: uuidV4(),
+    name: '',
+    color: PRIMARY,
+    password: this.props.autoGeneration ? GeneratePassword(this.props.passwordLength) : '',
+    icon: 'cubes',
+    login: '',
+    url: '',
     modalIsOpen: false,
   };
 
+  constructor(props: Props) {
+    super(props);
+    if (this.props.edition) {
+      const { key, name, color, password, icon, login, url } = this.props.password;
+      this.state = {
+        key,
+        name,
+        color,
+        password,
+        icon,
+        login,
+        url,
+        modalIsOpen: false,
+      };
+    }
+  }
+
   save() {
-    console.log('====================================');
-    console.log('save password');
-    console.log('====================================');
+    const { cryptoKey, iv, passwords, edition } = this.props;
+    const passwordToEdit: Password = {
+      key: this.state.key,
+      name: this.state.name,
+      color: this.state.color,
+      password: this.state.password,
+      icon: this.state.icon,
+      login: this.state.login,
+      url: this.state.url,
+    };
+    this.props.actions.EditPassword(passwordToEdit, edition, cryptoKey, iv, passwords, () =>
+      this.props.navigation.goBack(),
+    );
   }
 
   generatePassword() {
-    console.log('====================================');
-    console.log('generate password');
-    console.log('====================================');
+    this.setState({
+      password: GeneratePassword(this.props.passwordLength),
+    });
   }
 
   selectIcon(icon: string) {
@@ -154,7 +200,23 @@ class ReadOnlyScreen extends Component<void, void, State> {
   }
 }
 
-export default ReadOnlyScreen;
+function mapStateToProps(state: ReduxState, ownProps: Object) {
+  const passwordKey = ownProps.navigation.state.params.passwordKey;
+  const edition = passwordKey !== 0;
+  const password = state.data.passwords.byId[passwordKey];
+  return {
+    edition,
+    password,
+    passwordLength: state.settings.passwordLength,
+    autoGeneration: state.settings.autoGeneration,
+    cryptoKey: state.data.key,
+    iv: state.user.iv,
+    passwords: state.data.passwords,
+  };
+}
+export default connect(mapStateToProps, dispatch => ({
+  actions: bindActionCreators(PasswordActions, dispatch),
+}))(ReadOnlyScreen);
 
 const styles = PlateformStyleSheet({
   main: {

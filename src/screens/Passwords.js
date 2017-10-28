@@ -59,7 +59,7 @@ class PassworsScreen extends Component<void, Props, State> {
   }
 
   addNewItem() {
-    this.props.navigation.navigate('Edit');
+    this.props.navigation.navigate('Edit', { passwordKey: 0 });
   }
 
   openMenu() {

@@ -20,7 +20,7 @@ import { removeInObject, removeInArray } from '../common/ReduxUtils';
 *** Actions ***
 */
 
-export const editPassword = (
+export const EditPassword = (
   password: Password,
   edition: boolean,
   key: CryptoJS.WordArray,
@@ -33,13 +33,13 @@ export const editPassword = (
   if (edition) {
     updatedPasswordsState = {
       ...passwordsState,
-      byKeys: { ...passwordsState.byId, [password.key]: password },
+      byId: { ...passwordsState.byId, [password.key]: password },
     };
     dispatch(updatePassword(password));
   } else {
     updatedPasswordsState = {
       ...passwordsState,
-      byKeys: { ...passwordsState.byId, [password.key]: password },
+      byId: { ...passwordsState.byId, [password.key]: password },
       allIds: [...passwordsState.allIds, password.key],
     };
     dispatch(addPassword(password));
@@ -50,7 +50,7 @@ export const editPassword = (
 
   back();
 };
-export const deletePassword = (
+export const DeletePassword = (
   passwordKey: string,
   key: CryptoJS.WordArray,
   iv: string,
@@ -61,7 +61,7 @@ export const deletePassword = (
 
   updatedPasswordsState = {
     ...passwordsState,
-    byKeys: removeInObject(passwordsState.byId, passwordKey),
+    byId: removeInObject(passwordsState.byId, passwordKey),
     allIds: removeInArray(passwordsState.allIds, passwordKey),
   };
   dispatch(removePassword(passwordKey));
@@ -72,7 +72,7 @@ export const deletePassword = (
   back();
 };
 
-export const deleteAllPasswords = (key: CryptoJS.WordArray, iv: string): ThunkAction => (
+export const DeleteAllPasswords = (key: CryptoJS.WordArray, iv: string): ThunkAction => (
   dispatch: Dispatch,
 ) => {
   const emptyPassword = JSON.stringify({ allIds: [], byId: {} });

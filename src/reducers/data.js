@@ -31,7 +31,7 @@ const dataState = (state: DataState = initialState, action: Action): DataState =
         ...state,
         passwords: {
           ...state.passwords,
-          byKeys: { ...state.passwords.byId, [action.password.key]: action.password },
+          byId: { ...state.passwords.byId, [action.password.key]: action.password },
           allIds: [...state.passwords.allIds, action.password.key],
         },
       };
@@ -40,7 +40,7 @@ const dataState = (state: DataState = initialState, action: Action): DataState =
         ...state,
         passwords: {
           ...state.passwords,
-          byKeys: { ...state.passwords.byId, [action.password.key]: action.password },
+          byId: { ...state.passwords.byId, [action.password.key]: action.password },
         },
       };
     case 'DELETE_PASSWORD':
@@ -48,7 +48,7 @@ const dataState = (state: DataState = initialState, action: Action): DataState =
         ...state,
         passwords: {
           ...state.passwords,
-          byKeys: removeInObject(state.passwords.byId, action.passwordKey),
+          byId: removeInObject(state.passwords.byId, action.passwordKey),
           allIds: removeInArray(state.passwords.allIds, action.passwordKey),
         },
       };
