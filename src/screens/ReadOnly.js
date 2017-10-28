@@ -5,51 +5,51 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity, Text, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import CryptoJS from 'crypto-js';
+import type { ReduxState } from '../reducers/types';
+import type { Password } from '../types/Password';
+import type { NormalizedState } from '../types/NormalizedState';
+import { DeletePassword } from '../actions/passwords';
 import { PlateformStyleSheet } from '../common/PlatformHelper';
 import ReadOnlyRow from '../components/ReadOnlyRow';
 import strings from '../locales/strings';
 import { IOS_BACKGROUND, WHITE, DELETE_COLOR, PRIMARY } from '../constants/colors';
 import { ANDROID_MARGIN, IOS_MARGIN } from '../constants/dimensions';
 
-type State = {
-  key: string,
-  name: string,
-  color: string,
-  password: string,
-  icon: string,
-  login: string,
-  url: string,
+type Props = {
+  password: Password,
+  cryptoKey: CryptoJS.WordArray,
+  iv: string,
+  passwords: NormalizedState,
+  navigation: Object,
+  actions: Object,
 };
 
-class ReadOnlyScreen extends Component<void, void, State> {
-  state = {
-    key: '9939diz-cd',
-    name: 'Facebook',
-    color: '#64A1F6',
-    password: 'poekfpOKOEOFE398045:=:kOZ',
-    icon: 'facebook',
-    login: 'someuse@gmail.com',
-    url: 'https://www.facebook.com/',
-  };
-
+class ReadOnlyScreen extends Component<void, Props, void> {
   editPassword() {
-    this.props.navigation.navigate('Edit');
+    this.props.navigation.navigate('Edit', {
+      passwordKey: this.props.password.key,
+    });
   }
 
   copyPassword() {
-    console.log('====================================');
     console.log('copy password');
-    console.log('====================================');
   }
 
   deletePassword() {
-    console.log('====================================');
-    console.log('delet password');
-    console.log('====================================');
+    const { cryptoKey, iv, passwords, navigation } = this.props;
+    this.props.actions.DeletePassword(this.props.password.key, cryptoKey, iv, passwords, () =>
+      navigation.goBack(),
+    );
   }
 
   render() {
-    const { icon, color, name, password, login, url } = this.state;
+    if (!this.props.password) {
+      return <View />;
+    }
+    const { icon, color, name, password, login, url } = this.props.password;
     return (
       <ScrollView style={styles.scrollContent}>
         <View style={styles.container}>
@@ -80,7 +80,20 @@ class ReadOnlyScreen extends Component<void, void, State> {
   }
 }
 
-export default ReadOnlyScreen;
+function mapStateToProps(state: ReduxState, ownProps: Object) {
+  const passwordKey = ownProps.navigation.state.params.passwordKey;
+
+  const password = state.data.passwords.byId[passwordKey];
+  return {
+    password,
+    cryptoKey: state.data.key,
+    iv: state.user.iv,
+    passwords: state.data.passwords,
+  };
+}
+export default connect(mapStateToProps, dispatch => ({
+  actions: bindActionCreators({ DeletePassword }, dispatch),
+}))(ReadOnlyScreen);
 
 const styles = PlateformStyleSheet({
   scrollContent: {

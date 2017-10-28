@@ -38,7 +38,10 @@ class PassworsScreen extends Component<void, Props, State> {
   }
 
   showPassword(password: Password) {
-    this.props.navigation.navigate('ReadOnly', { siteName: password.name });
+    this.props.navigation.navigate('ReadOnly', {
+      siteName: password.name,
+      passwordKey: password.key,
+    });
   }
 
   searchPassword(search: string) {

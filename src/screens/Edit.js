@@ -47,7 +47,7 @@ type Props = {
   passwords: NormalizedState,
 };
 
-class ReadOnlyScreen extends Component<void, Props, State> {
+class EditScreen extends Component<void, Props, State> {
   loginField: Object;
   urlField: Object;
   passwordField: Object;
@@ -81,7 +81,7 @@ class ReadOnlyScreen extends Component<void, Props, State> {
   }
 
   save() {
-    const { cryptoKey, iv, passwords, edition } = this.props;
+    const { cryptoKey, iv, passwords, edition, navigation } = this.props;
     const passwordToEdit: Password = {
       key: this.state.key,
       name: this.state.name,
@@ -92,7 +92,7 @@ class ReadOnlyScreen extends Component<void, Props, State> {
       url: this.state.url,
     };
     this.props.actions.EditPassword(passwordToEdit, edition, cryptoKey, iv, passwords, () =>
-      this.props.navigation.goBack(),
+      navigation.goBack(),
     );
   }
 
@@ -216,7 +216,7 @@ function mapStateToProps(state: ReduxState, ownProps: Object) {
 }
 export default connect(mapStateToProps, dispatch => ({
   actions: bindActionCreators(PasswordActions, dispatch),
-}))(ReadOnlyScreen);
+}))(EditScreen);
 
 const styles = PlateformStyleSheet({
   main: {
