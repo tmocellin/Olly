@@ -4,6 +4,9 @@
 import React, { Component } from 'react';
 import { View, Platform, StyleSheet } from 'react-native';
 import _ from 'lodash';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import type { ReduxState } from '../reducers/types';
 import SearchBar from '../components/SearchBar';
 import PasswordList from '../components/PasswordList';
 import ActionButton from '../components/ActionButton';
@@ -12,50 +15,45 @@ import { ANDROID_MARGIN } from '../constants/dimensions';
 import type { Password } from '../types/Password';
 
 type State = {
-  passwords: Array<Password>,
   searchResults: Array<Password>,
   searchValue: string,
 };
 
-class PassworsScreen extends Component<void, void, State> {
+type Props = {
+  passwords: Array<Password>,
+  navigation: Object,
+};
+
+class PassworsScreen extends Component<void, Props, State> {
   // les valeurs du state sont temporaires et changeront lorsqu'on ajoutera redux
   state = {
-    passwords: [
-      { name: 'Twitter', key: 'uuid', icon: 'twitter', color: 'red' },
-      { name: 'Facebook', key: 'uuid-2', icon: 'facebook', color: 'blue' },
-      { name: 'Twitter', key: 'uuid-3', icon: 'twitter', color: 'red' },
-      { name: 'Facebook', key: 'uuid-4', icon: 'facebook', color: 'blue' },
-      { name: 'Twitter', key: 'uuid-5', icon: 'twitter', color: 'red' },
-      { name: 'Facebook', key: 'uuid-6', icon: 'facebook', color: 'blue' },
-    ],
     searchValue: '',
-    searchResults: [
-      { name: 'Twitter', key: 'uuid', icon: 'twitter', color: 'red' },
-      { name: 'Facebook', key: 'uuid-2', icon: 'facebook', color: 'blue' },
-      { name: 'Twitter', key: 'uuid-3', icon: 'twitter', color: 'red' },
-      { name: 'Facebook', key: 'uuid-4', icon: 'facebook', color: 'blue' },
-      { name: 'Twitter', key: 'uuid-5', icon: 'twitter', color: 'red' },
-      { name: 'Facebook', key: 'uuid-6', icon: 'facebook', color: 'blue' },
-    ],
+    searchResults: this.props.passwords,
   };
+
+  componentWillReceiveProps(nextProps: Props) {
+    this.setState({
+      searchResults: nextProps.passwords,
+    });
+  }
 
   showPassword(password: Password) {
     this.props.navigation.navigate('ReadOnly', { siteName: password.name });
   }
 
   searchPassword(search: string) {
-    const result = _.filter(this.state.passwords, data =>
+    const result = _.filter(this.props.passwords, data =>
       data.name.toLowerCase().includes(search.toLowerCase()),
     );
     this.setState({
-      searchResults: search.length > 0 ? result : this.state.passwords,
+      searchResults: search.length > 0 ? result : this.props.passwords,
       searchValue: search,
     });
   }
 
   clearSearch() {
     this.setState({
-      searchResults: this.state.passwords,
+      searchResults: this.props.passwords,
       searchValue: '',
     });
   }
@@ -101,7 +99,15 @@ class PassworsScreen extends Component<void, void, State> {
   }
 }
 
-export default PassworsScreen;
+function mapStateToProps(state: ReduxState) {
+  const passwords = _.values(state.data.passwords.byId);
+  return {
+    passwords,
+  };
+}
+export default connect(mapStateToProps, dispatch => ({
+  actions: bindActionCreators({}, dispatch),
+}))(PassworsScreen);
 
 const styles = StyleSheet.create({
   container: {
