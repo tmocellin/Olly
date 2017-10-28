@@ -65,3 +65,28 @@ export const GetLevelColor = (password: string): string => {
 
   return levelLow;
 };
+
+export const GeneratePassword = (length: number): string => {
+  const plength = length;
+  const keylistalpha = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const keylistint = '123456789';
+  const keylistspec = '!@#_+/?$%';
+  let temp = '';
+  let len = plength / 2;
+  len -= 1;
+  for (let i = 0; i < len; i += 1) {
+    temp += keylistalpha.charAt(Math.floor(Math.random() * keylistalpha.length));
+  }
+  for (let i = 0; i < len; i += 1) {
+    temp += keylistspec.charAt(Math.floor(Math.random() * keylistspec.length));
+  }
+  for (let i = 0; i < len; i += 1) {
+    temp += keylistint.charAt(Math.floor(Math.random() * keylistint.length));
+  }
+  temp = temp
+    .split('')
+    .sort(() => 0.5 - Math.random())
+    .join('');
+
+  return temp;
+};
