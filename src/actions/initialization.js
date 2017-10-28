@@ -56,7 +56,7 @@ const initializationFail = (error: string): InitializationFailAction => ({
   error,
 });
 
-const updateCryptedPasswords = (cryptedPassword: strings): UpdateCryptedPasswordsAction => ({
+const updateCryptedPasswords = (cryptedPassword: string): UpdateCryptedPasswordsAction => ({
   type: 'UPDATE_CRYPTED_PASSWORDS',
   cryptedPassword,
 });

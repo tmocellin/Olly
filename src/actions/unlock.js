@@ -6,6 +6,7 @@ import type { ThunkAction, Dispatch, UnlockAppAction, UnlockAppFailAction } from
 import type { NormalizedState } from '../types/NormalizedState';
 import strings from '../locales/strings';
 import { IsValidPassword, Decrypt, GenerateKey } from '../common/CryptoHelper';
+import CryptoJS from 'crypto-js';
 
 /*
 *** Actions ***
@@ -34,7 +35,10 @@ export default unlockApp;
 *** Actions Creator ***
 */
 
-const unlockApplication = (key: strings, passwords: NormalizedState): UnlockAppAction => ({
+const unlockApplication = (
+  key: CryptoJS.WordArray,
+  passwords: NormalizedState,
+): UnlockAppAction => ({
   type: 'UNLOCK_APP',
   key,
   passwords,
