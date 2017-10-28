@@ -1,8 +1,8 @@
 /*
 * @flow
 */
+
 import CryptoJS from 'crypto-js';
-import _ from 'lodash';
 import type {
   ThunkAction,
   Dispatch,
@@ -15,6 +15,7 @@ import type {
 import type { Password } from '../types/Password';
 import type { NormalizedState } from '../types/NormalizedState';
 import { Encrypt } from '../common/CryptoHelper';
+import { removeInObject, removeInArray } from '../common/ReduxUtils';
 /*
 *** Actions ***
 */
@@ -60,8 +61,8 @@ export const deletePassword = (
 
   updatedPasswordsState = {
     ...passwordsState,
-    byKeys: _.pickBy(passwordsState.byId, obj => obj.id !== passwordKey),
-    allIds: passwordsState.allIds.filter(id => id !== passwordKey),
+    byKeys: removeInObject(passwordsState.byId, passwordKey),
+    allIds: removeInArray(passwordsState.allIds, passwordKey),
   };
   dispatch(removePassword(passwordKey));
 

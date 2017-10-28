@@ -4,6 +4,7 @@
 
 import type { Action } from '../actions/types';
 import type { DataState } from './types';
+import { removeInObject, removeInArray } from '../common/ReduxUtils';
 
 const initialState: DataState = {
   passwords: { allIds: [], byId: {} },
@@ -25,6 +26,34 @@ const dataState = (state: DataState = initialState, action: Action): DataState =
         ...state,
         error: action.error,
       };
+    case 'ADD_PASSWORD':
+      return {
+        ...state,
+        passwords: {
+          ...state.passwords,
+          byKeys: { ...state.passwords.byId, [action.password.key]: action.password },
+          allIds: [...state.passwords.allIds, action.password.key],
+        },
+      };
+    case 'UPDATE_PASSWORD':
+      return {
+        ...state,
+        passwords: {
+          ...state.passwords,
+          byKeys: { ...state.passwords.byId, [action.password.key]: action.password },
+        },
+      };
+    case 'DELETE_PASSWORD':
+      return {
+        ...state,
+        passwords: {
+          ...state.passwords,
+          byKeys: removeInObject(state.passwords.byId, action.passwordKey),
+          allIds: removeInArray(state.passwords.allIds, action.passwordKey),
+        },
+      };
+    case 'DELETE_ALL_PASSWORDS':
+      return { ...state, passwords: { allIds: [], byId: {} } };
     default:
       return state;
   }
