@@ -3,6 +3,7 @@
  */
 import CryptoJS from 'crypto-js';
 import type { NormalizedState } from '../types/NormalizedState';
+import type { Password } from '../types/Password';
 
 export type Dispatch = (action: Action | ThunkAction | Array<Action>) => any;
 export type GetState = () => Object;
@@ -64,6 +65,22 @@ export type UnlockAppFailAction = {
   error: string,
 };
 
+export type AddPasswordAction = {
+  type: 'ADD_PASSWORD',
+  password: Password,
+};
+export type UpdatePasswordAction = {
+  type: 'UPDATE_PASSWORD',
+  password: Password,
+};
+export type DeletePasswordAction = {
+  type: 'DELETE_PASSWORD',
+  passwordKey: string,
+};
+export type DeleteAllPasswordsAction = {
+  type: 'DELETE_ALL_PASSWORDS',
+};
+
 export type Action =
   /** *** Settings **** */
   | SetPasswordLengthAction
@@ -74,4 +91,8 @@ export type Action =
   /** *** Passwords **** */
   | UpdateCryptedPasswordsAction
   | UnlockAppAction
-  | UnlockAppFailAction;
+  | UnlockAppFailAction
+  | AddPasswordAction
+  | UpdatePasswordAction
+  | DeletePasswordAction
+  | DeleteAllPasswordsAction;
