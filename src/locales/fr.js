@@ -45,4 +45,7 @@ export default {
   confirmationError: 'Votre mot de passe et la confirmation ne sont pas identiques',
   passwordLenghtError: 'Vous devez saisir le mot de passe et la confirmation',
   invalid_password: 'Votre mot de passe est invalide. Réessayer',
+  // Other
+  succes: 'Succès',
+  copyMessage: 'Le mot de passe a bien été ajouté au presse-papier',
 };

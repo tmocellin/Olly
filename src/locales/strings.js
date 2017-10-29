@@ -48,6 +48,8 @@ const AppString = {
   confirmationError: I18n.t('confirmationError'),
   passwordLenghtError: I18n.t('passwordLenghtError'),
   invalid_password: I18n.t('invalid_password'),
+  succes: I18n.t('succes'),
+  copyMessage: I18n.t('copyMessage'),
 };
 
 export default AppString;

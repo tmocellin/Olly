@@ -44,4 +44,6 @@ export default {
   confirmationError: 'Your password and confirmation are not the same',
   passwordLenghtError: 'You need to define a password and the confirmation',
   invalid_password: 'Your password is invalid. Try again',
+  succes: 'Success',
+  copyMessage: 'The password has been added to the clipboard',
 };

@@ -3,7 +3,7 @@
 */
 
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Text, ScrollView } from 'react-native';
+import { View, TouchableOpacity, Text, ScrollView, Clipboard, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -35,7 +35,8 @@ class ReadOnlyScreen extends Component<void, Props, void> {
   }
 
   copyPassword() {
-    console.log('copy password');
+    Clipboard.setString(this.props.password.password);
+    Alert.alert(strings.succes, strings.copyMessage);
   }
 
   deletePassword() {

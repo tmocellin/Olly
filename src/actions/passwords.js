@@ -77,7 +77,7 @@ export const DeleteAllPasswords = (key: CryptoJS.WordArray, iv: string): ThunkAc
 ) => {
   const emptyPassword = JSON.stringify({ allIds: [], byId: {} });
   dispatch(removeAllPasswords());
-  const cryptedPasswords = Encrypt(JSON.stringify(emptyPassword), key, iv);
+  const cryptedPasswords = Encrypt(emptyPassword, key, iv);
   dispatch(updateCryptedPasswords(cryptedPasswords));
 };
 
