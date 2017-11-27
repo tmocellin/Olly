@@ -4,11 +4,11 @@
 
 import React, { Component } from 'react';
 import { View, Alert, ActivityIndicator } from 'react-native';
-import SettingRow from '../components/SettingRow';
-import strings from '../locales/strings';
-import { PlateformStyleSheet } from '../common/PlatformHelper';
-import { IOS_BACKGROUND, WHITE, DELETE_COLOR, PRIMARY } from '../constants/colors';
-import NavBar from '../components/NavBar';
+import SettingRow from '../../components/SettingRow';
+import strings from '../../locales/strings';
+import { PlateformStyleSheet } from '../../common/PlatformHelper';
+import { IOS_BACKGROUND, WHITE, DELETE_COLOR, PRIMARY } from '../../constants/colors';
+import NavBar from '../../components/NavBar';
 
 export default class SynchronizationScreen extends Component {
   uploadBackup() {
