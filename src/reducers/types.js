@@ -3,6 +3,7 @@
 */
 import type { NormalizedState } from '../types/NormalizedState';
 import CryptoJS from 'crypto-js';
+import SynchronizationScreen from '../screens/Synchronization/Synchronization';
 
 export type SettingsState = {
   +passwordLength: number,
@@ -32,4 +33,8 @@ export type ReduxState = {
   +user: UserState,
   +data: DataState,
   +cryptedData: CryptedDataState,
+};
+
+export type SynchronizationState = {
+  +userLoggedToDropbox: boolean,
 };
