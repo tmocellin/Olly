@@ -7,7 +7,7 @@ import type { SynchronizationState } from './types';
 
 const initialState: SynchronizationState = {
   userLoggedToDropbox: false,
-  accesToken: '',
+  accessToken: '',
 };
 
 const synchronizationState = (
@@ -16,7 +16,7 @@ const synchronizationState = (
 ): SynchronizationState => {
   switch (action.type) {
     case 'SET_ACCESS_TOKEN':
-      return { ...state, userLoggedToDropbox: true, accesToken: action.token };
+      return { ...state, userLoggedToDropbox: true, accessToken: action.token };
 
     default:
       return state;

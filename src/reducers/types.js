@@ -1,9 +1,8 @@
 /*
 * @flow
 */
-import type { NormalizedState } from '../types/NormalizedState';
 import CryptoJS from 'crypto-js';
-import SynchronizationScreen from '../screens/Synchronization/Synchronization';
+import type { NormalizedState } from '../types/NormalizedState';
 
 export type SettingsState = {
   +passwordLength: number,
@@ -28,14 +27,15 @@ export type CryptedDataState = {
   +passwords: string,
 };
 
+export type SynchronizationState = {
+  +userLoggedToDropbox: boolean,
+  +accessToken: string,
+};
+
 export type ReduxState = {
   +settings: SettingsState,
   +user: UserState,
   +data: DataState,
   +cryptedData: CryptedDataState,
-};
-
-export type SynchronizationState = {
-  +userLoggedToDropbox: boolean,
-  +accesToken: string,
+  +synchronization: SynchronizationState,
 };
