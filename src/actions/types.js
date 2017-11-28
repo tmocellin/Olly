@@ -81,6 +81,16 @@ export type DeleteAllPasswordsAction = {
   type: 'DELETE_ALL_PASSWORDS',
 };
 
+/*
+**************
+* Synchronization
+**************
+*/
+export type SetAccessTokenAction = {
+  type: 'SET_ACCESS_TOKEN',
+  token: string,
+};
+
 export type Action =
   /** *** Settings **** */
   | SetPasswordLengthAction
@@ -95,4 +105,6 @@ export type Action =
   | AddPasswordAction
   | UpdatePasswordAction
   | DeletePasswordAction
-  | DeleteAllPasswordsAction;
+  | DeleteAllPasswordsAction
+  /** *** Synchronization **** */
+  | SetAccessTokenAction;
