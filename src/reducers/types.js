@@ -37,4 +37,5 @@ export type ReduxState = {
 
 export type SynchronizationState = {
   +userLoggedToDropbox: boolean,
+  +accesToken: string,
 };
