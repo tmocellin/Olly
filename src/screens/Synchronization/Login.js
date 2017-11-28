@@ -4,6 +4,7 @@
 import React, { Component } from 'react';
 import { View, Image, Button, Text, StyleSheet, Linking, Platform } from 'react-native'; // #1
 import uuidV4 from 'uuid/v4'; // #2
+import shittyQs from 'shitty-qs';
 import strings from '../../locales/strings';
 import { PRIMARY_TEXT, PRIMARY, WHITE } from '../../constants/colors';
 import NavBar from '../../components/NavBar';
@@ -14,6 +15,7 @@ const img = require('../../img/paper_plane.png');
 
 type Props = {
   navigation: Object,
+  setAccessToken: (token: string) => void,
 };
 
 type State = {
@@ -25,6 +27,24 @@ class Login extends Component<void, Props, State> {
   state = {
     verification: uuidV4(), // #5
   };
+
+  componentDidMount() {
+    Linking.addEventListener('url', event => this.handleLinkingUrl(event));
+  }
+
+  componentWillUnmount() {
+    Linking.removeEventListener('url', event => this.handleLinkingUrl(event));
+  }
+
+  handleLinkingUrl(event: Object) {
+    const [, queryString] = event.url.match(/\#(.*)/);
+    const query = shittyQs(queryString);
+    if (this.state.verification === query.state) {
+      this.props.setAccessToken(query.access_token);
+    } else {
+      alert('Verification Failed');
+    }
+  }
 
   logIn() {
     // #6
