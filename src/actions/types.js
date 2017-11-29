@@ -91,6 +91,20 @@ export type SetAccessTokenAction = {
   token: string,
 };
 
+export type DropboxStartAction = {
+  type: 'DROPBOX_ACTION_START',
+};
+
+export type DropboxSuccessAction = {
+  type: 'DROPBOX_ACTION_SUCCESS',
+  info: string,
+};
+
+export type DropboxFailAction = {
+  type: 'DROPBOX_ACTION_FAIL',
+  error: string,
+};
+
 export type Action =
   /** *** Settings **** */
   | SetPasswordLengthAction
@@ -107,4 +121,7 @@ export type Action =
   | DeletePasswordAction
   | DeleteAllPasswordsAction
   /** *** Synchronization **** */
-  | SetAccessTokenAction;
+  | SetAccessTokenAction
+  | DropboxStartAction
+  | DropboxSuccessAction
+  | DropboxFailAction;
