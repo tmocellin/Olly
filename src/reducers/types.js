@@ -30,6 +30,9 @@ export type CryptedDataState = {
 export type SynchronizationState = {
   +userLoggedToDropbox: boolean,
   +accessToken: string,
+  +pendingAction: boolean,
+  +message: string,
+  +success: boolean,
 };
 
 export type ReduxState = {
