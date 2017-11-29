@@ -55,6 +55,7 @@ const Index = (props: Props) => {
             passwordLength,
             autoGeneration,
           )}
+        deleteBackup={() => props.actions.DeleteData(accessToken)}
       />
     );
   }

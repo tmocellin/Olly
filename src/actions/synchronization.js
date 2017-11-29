@@ -67,6 +67,32 @@ export function BackUpData(
   };
 }
 
+export function DeleteData(token: string): ThunkAction {
+  return async (dispatch: Dispatch) => {
+    dispatch(startDropboxAction(strings.deletePending));
+    try {
+      const req = {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: '{"path": "/data_backup.json"}',
+      };
+      const response = await fetch('https://api.dropboxapi.com/2/files/delete', req);
+      if (response.status.toString() === '409') {
+        dispatch(dropboxActionFail(strings.notFound));
+      } else if (response.status.toString() !== '200') {
+        dispatch(dropboxActionFail(strings.unHandled));
+      } else {
+        dispatch(dropboxActionSuccess(strings.deleteBackupSuccess));
+      }
+    } catch (error) {
+      dispatch(dropboxActionFail(error.toString()));
+    }
+  };
+}
+
 /*
 *** Actions Creator ***
 */

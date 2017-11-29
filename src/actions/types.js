@@ -25,6 +25,12 @@ export type SetAutoGenerationAction = {
   autoGeneration: boolean,
 };
 
+export type SetSettingsAction = {
+  type: 'SET_SETTINGS',
+  length: number,
+  autoGeneration: boolean,
+};
+
 /*
 **************
 * Initialization
@@ -81,6 +87,11 @@ export type DeleteAllPasswordsAction = {
   type: 'DELETE_ALL_PASSWORDS',
 };
 
+export type SetPasswordsAction = {
+  type: 'SET_PASSWORDS',
+  passwords: NormalizedState,
+};
+
 /*
 **************
 * Synchronization
@@ -110,6 +121,7 @@ export type Action =
   /** *** Settings **** */
   | SetPasswordLengthAction
   | SetAutoGenerationAction
+  | SetSettingsAction
   /** *** Initialization **** */
   | InitializationSuccessAction
   | InitializationFailAction
@@ -121,6 +133,7 @@ export type Action =
   | UpdatePasswordAction
   | DeletePasswordAction
   | DeleteAllPasswordsAction
+  | SetPasswordsAction
   /** *** Synchronization **** */
   | SetAccessTokenAction
   | DropboxStartAction

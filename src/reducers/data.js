@@ -54,6 +54,9 @@ const dataState = (state: DataState = initialState, action: Action): DataState =
       };
     case 'DELETE_ALL_PASSWORDS':
       return { ...state, passwords: { allIds: [], byId: {} } };
+
+    case 'SET_PASSWORD':
+      return { ...state, passwords: action.passwords };
     default:
       return state;
   }
