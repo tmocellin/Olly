@@ -2,9 +2,11 @@
 * @flow
 */
 import RNFetchBlob from 'react-native-fetch-blob';
+import CryptoJS from 'crypto-js';
 import Base64 from 'base-64';
+import { Decrypt } from '../common/CryptoHelper';
 import strings from '../locales/strings';
-
+import type { NormalizedState } from '../types/NormalizedState';
 import type {
   ThunkAction,
   Dispatch,
@@ -12,6 +14,9 @@ import type {
   DropboxStartAction,
   DropboxSuccessAction,
   DropboxFailAction,
+  SetPasswordsAction,
+  SetSettingsAction,
+  UpdateCryptedPasswordsAction,
 } from './types';
 
 /*
@@ -93,6 +98,43 @@ export function DeleteData(token: string): ThunkAction {
   };
 }
 
+export function DownloadData(
+  token: string,
+  verificationToken: string,
+  key: CryptoJS.WordArray,
+): ThunkAction {
+  return async (dispatch: Dispatch) => {
+    dispatch(startDropboxAction(strings.pullPending));
+    try {
+      const response = await RNFetchBlob.fetch(
+        'POST',
+        'https://content.dropboxapi.com/2/files/download',
+        {
+          Authorization: `Bearer ${token}`,
+          'Dropbox-API-Arg': '{"path": "/data_backup.json"}',
+        },
+      );
+      if (response.respInfo.status.toString() === '409') {
+        dispatch(dropboxActionFail(strings.notFound));
+      } else if (response.respInfo.status.toString() !== '200') {
+        dispatch(dropboxActionFail(strings.unHandled));
+      } else {
+        const data = JSON.parse(response.data);
+        if (verificationToken === data.vt) {
+          let uncryptedPasswords = Decrypt(data.d, key, data.v);
+          uncryptedPasswords = JSON.parse(uncryptedPasswords);
+          dispatch(setSettings(data.st.passwordLength, data.st.autoGeneration));
+          dispatch(setPasswords(uncryptedPasswords));
+          dispatch(updateCryptedPasswords(data.d));
+          dispatch(dropboxActionSuccess(strings.dowloadSuccess));
+        }
+      }
+    } catch (error) {
+      dispatch(dropboxActionFail(error.toString()));
+    }
+  };
+}
+
 /*
 *** Actions Creator ***
 */
@@ -115,4 +157,20 @@ const dropboxActionSuccess = (info: string): DropboxSuccessAction => ({
 const dropboxActionFail = (error: string): DropboxFailAction => ({
   type: 'DROPBOX_ACTION_FAIL',
   error,
+});
+
+const setSettings = (length: number, autoGeneration: boolean): SetSettingsAction => ({
+  type: 'SET_SETTINGS',
+  length,
+  autoGeneration,
+});
+
+const setPasswords = (passwords: NormalizedState): SetPasswordsAction => ({
+  type: 'SET_PASSWORDS',
+  passwords,
+});
+
+const updateCryptedPasswords = (cryptedPassword: string): UpdateCryptedPasswordsAction => ({
+  type: 'UPDATE_CRYPTED_PASSWORDS',
+  cryptedPassword,
 });

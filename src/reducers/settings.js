@@ -17,7 +17,7 @@ const settingsState = (state: SettingsState = initialState, action: Action): Set
     case 'SET_AUTO_GENERATION':
       return { ...state, autoGeneration: action.autoGeneration };
     case 'SET_SETTINGS':
-      return { ...state, autoGeneration: action.autoGeneration, length: action.length };
+      return { ...state, autoGeneration: action.autoGeneration, passwordLength: action.length };
     default:
       return state;
   }

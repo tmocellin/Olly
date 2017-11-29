@@ -4,6 +4,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import CryptoJS from 'crypto-js';
 import type { ReduxState } from '../../reducers/types';
 import * as synchronizationActions from '../../actions/synchronization';
 import Synchronization from './Synchronization';
@@ -23,6 +24,7 @@ type Props = {
   verificationToken: string,
   passwordLength: number,
   autoGeneration: boolean,
+  cryptoKey: CryptoJS.WordArray,
 };
 
 const Index = (props: Props) => {
@@ -35,6 +37,7 @@ const Index = (props: Props) => {
     verificationToken,
     passwordLength,
     autoGeneration,
+    cryptoKey,
   } = props;
 
   if (isLoggedIn) {
@@ -56,6 +59,7 @@ const Index = (props: Props) => {
             autoGeneration,
           )}
         deleteBackup={() => props.actions.DeleteData(accessToken)}
+        downloadBackup={() => props.actions.DownloadData(accessToken, verificationToken, cryptoKey)}
       />
     );
   }
@@ -77,6 +81,7 @@ function mapStateToProps(state: ReduxState) {
     passwords: state.cryptedData.passwords,
     iv: state.user.iv,
     salt: state.user.salt,
+    cryptoKey: state.data.key,
     verificationToken: state.user.verificationToken,
     passwordLength: state.settings.passwordLength,
     autoGeneration: state.settings.autoGeneration,

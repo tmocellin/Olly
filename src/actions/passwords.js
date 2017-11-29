@@ -44,7 +44,6 @@ export const EditPassword = (
     };
     dispatch(addPassword(password));
   }
-
   const cryptedPasswords = Encrypt(JSON.stringify(updatedPasswordsState), key, iv);
   dispatch(updateCryptedPasswords(cryptedPasswords));
 
