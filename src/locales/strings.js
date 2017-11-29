@@ -50,6 +50,15 @@ const AppString = {
   invalid_password: I18n.t('invalid_password'),
   succes: I18n.t('succes'),
   copyMessage: I18n.t('copyMessage'),
+  publishPending: I18n.t('publishPending'),
+  pullPending: I18n.t('pullPending'),
+  deletePending: I18n.t('deletePending'),
+  unHandled: I18n.t('unHandled'),
+  notFound: I18n.t('notFound'),
+  notSameVerification: I18n.t('notSameVerification'),
+  uploadSuccess: I18n.t('uploadSuccess'),
+  dowloadSuccess: I18n.t('dowloadSuccess'),
+  deleteBackupSuccess: I18n.t('deleteBackupSuccess'),
 };
 
 export default AppString;

@@ -3,29 +3,49 @@
 */
 
 import React, { Component } from 'react';
-import { View, Alert, ActivityIndicator } from 'react-native';
+import { View, Alert, Text, ActivityIndicator } from 'react-native';
 import SettingRow from '../../components/SettingRow';
 import strings from '../../locales/strings';
 import { PlateformStyleSheet } from '../../common/PlatformHelper';
 import { IOS_BACKGROUND, WHITE, DELETE_COLOR, PRIMARY } from '../../constants/colors';
+import { ANDROID_MARGIN, IOS_MARGIN } from '../../constants/dimensions';
 import NavBar from '../../components/NavBar';
 
-export default class SynchronizationScreen extends Component {
+type Props = {
+  uploadBackup: () => void,
+  downloadBackup: () => void,
+  deleteBackup: () => void,
+  success: boolean,
+  message: string,
+  pendingAction: boolean,
+  navigation: Object,
+};
+
+export default class SynchronizationScreen extends Component<void, Props, void> {
   uploadBackup() {
-    console.log('====================================');
-    console.log('upload data');
-    console.log('====================================');
+    this.props.uploadBackup();
   }
   downloadBackup() {
-    console.log('====================================');
-    console.log('download data');
-    console.log('====================================');
+    this.props.downloadBackup();
   }
   deleteBackup() {
     Alert.alert(strings.clear, strings.clearConfirmation, [
       { text: strings.cancel, style: 'cancel' },
-      { text: strings.delete, onPress: () => console.log('delete data') },
+      { text: strings.delete, onPress: () => this.props.deleteBackup() },
     ]);
+  }
+
+  renderAction() {
+    if (this.props.pendingAction) {
+      return (
+        <View style={styles.loaderCtnr}>
+          <ActivityIndicator size="large" color={WHITE} animating />
+          <Text style={styles.msgPending}>{this.props.message}</Text>
+        </View>
+      );
+    }
+    const color = this.props.success ? PRIMARY : DELETE_COLOR;
+    return <Text style={[styles.msg, { color }]}>{this.props.message}</Text>;
   }
   render() {
     return (
@@ -59,6 +79,7 @@ export default class SynchronizationScreen extends Component {
             onPress={() => this.deleteBackup()}
           />
         </View>
+        {this.renderAction()}
       </View>
     );
   }
@@ -88,5 +109,18 @@ const styles = PlateformStyleSheet({
     backgroundColor: 'rgba( 0, 0, 0, 0.7 )',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  msg: {
+    ios: {
+      padding: IOS_MARGIN,
+    },
+    android: {
+      padding: ANDROID_MARGIN,
+    },
+  },
+  msgPending: {
+    color: WHITE,
+    fontWeight: 'bold',
+    marginTop: 16,
   },
 });

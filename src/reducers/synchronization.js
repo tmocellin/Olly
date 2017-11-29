@@ -22,7 +22,7 @@ const synchronizationState = (
       return { ...state, userLoggedToDropbox: true, accessToken: action.token };
 
     case 'DROPBOX_ACTION_START':
-      return { ...state, message: '', success: false, pendingAction: true };
+      return { ...state, message: action.info, success: false, pendingAction: true };
 
     case 'DROPBOX_ACTION_SUCCESS':
       return { ...state, message: action.info, success: true, pendingAction: false };

@@ -29,6 +29,16 @@ export default {
   publish: 'Publier les données',
   pull: 'Récupérer les données',
   deleteBackup: 'Supprimer la sauvegarde',
+  publishPending: 'Publication en cours ...',
+  pullPending: 'Récupération en cours ...',
+  deletePending: 'Supression en cours ...',
+  unHandled: 'Une erreur est survenue. Rééssayer plus tard',
+  notFound: 'Aucune sauvegarde trouvée',
+  notSameVerification:
+    "Le mot de passe des données n'est pas le même que celui actuelle. Impossible de récupérer les données",
+  uploadSuccess: 'Les données ont été sauvegarder sur Dropbox avec succès',
+  dowloadSuccess: 'Les données ont été restaurer avec succès',
+  deleteBackupSuccess: 'Votre sauvegarde a été supprimé avec succès',
   // Edition
   siteName: 'Nom du site',
   siteUrl: 'Url du site',

@@ -93,6 +93,7 @@ export type SetAccessTokenAction = {
 
 export type DropboxStartAction = {
   type: 'DROPBOX_ACTION_START',
+  info: string,
 };
 
 export type DropboxSuccessAction = {
