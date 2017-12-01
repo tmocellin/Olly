@@ -1,18 +1,24 @@
 /*
 * @flow
 */
-
-import type { ThunkAction, Dispatch, UnlockAppAction, UnlockAppFailAction } from './types';
+import { NavigationActions } from 'react-navigation';
+import CryptoJS from 'crypto-js';
+import type {
+  ThunkAction,
+  Dispatch,
+  UnlockAppAction,
+  UnlockAppFailAction,
+  LockAppAction,
+} from './types';
 import type { NormalizedState } from '../types/NormalizedState';
 import strings from '../locales/strings';
 import { IsValidPassword, Decrypt, GenerateKey } from '../common/CryptoHelper';
-import CryptoJS from 'crypto-js';
 
 /*
 *** Actions ***
 */
 
-const unlockApp = (
+export const unlockApp = (
   password: string,
   verificationToken: string,
   salt: string,
@@ -29,8 +35,10 @@ const unlockApp = (
     dispatch(unlockAppFail(strings.invalid_password));
   }
 };
-export default unlockApp;
 
+export const lockApp = (): ThunkAction => (dispatch: Dispatch) => {
+  dispatch(LockApp());
+};
 /*
 *** Actions Creator ***
 */
@@ -47,4 +55,8 @@ const unlockApplication = (
 const unlockAppFail = (error: string): UnlockAppFailAction => ({
   type: 'UNLOCK_APP_FAIL',
   error,
+});
+
+const LockApp = (): LockAppAction => ({
+  type: 'LOCK_APP',
 });

@@ -13,7 +13,7 @@ import strings from '../locales/strings';
 import { ANDROID_MARGIN, IOS_MARGIN } from '../constants/dimensions';
 import { PRIMARY, WHITE, DELETE_COLOR } from '../constants/colors';
 import type { ReduxState } from '../reducers/types';
-import unlockApp from '../actions/unlock';
+import * as UnlockActions from '../actions/unlock';
 
 const image = require('../img/book.png');
 
@@ -37,6 +37,10 @@ class UnlockScreen extends Component<void, Props, State> {
   };
 
   componentWillMount() {
+    const { params } = this.props.navigation.state;
+    if (params && params.reset) {
+      this.props.actions.lockApp();
+    }
     if (!this.props.appInitialized) {
       const resetAction = NavigationActions.reset({
         index: 0,
@@ -93,7 +97,7 @@ function mapStateToProps(state: ReduxState) {
   };
 }
 export default connect(mapStateToProps, dispatch => ({
-  actions: bindActionCreators({ unlockApp }, dispatch),
+  actions: bindActionCreators(UnlockActions, dispatch),
 }))(UnlockScreen);
 
 const styles = PlateformStyleSheet({

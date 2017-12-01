@@ -22,6 +22,7 @@ const AppString = {
   confirmation: I18n.t('confirmation'),
   save: I18n.t('save'),
   unlock: I18n.t('unlock'),
+  lock: I18n.t('lock'),
   passwordAuto: I18n.t('passwordAuto'),
   clear: I18n.t('clear'),
   clearConfirmation: I18n.t('clearConfirmation'),

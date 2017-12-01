@@ -14,6 +14,7 @@ export default {
   save: 'Enregistrer',
   // Unlock Screen
   unlock: 'Déverrouiller',
+  lock: 'Verouiller',
   // Settings Screen
   passwordAuto: 'Génération automatique',
   clear: 'Supprimer les données',

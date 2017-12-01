@@ -71,6 +71,10 @@ export type UnlockAppFailAction = {
   error: string,
 };
 
+export type LockAppAction = {
+  type: 'LOCK_APP',
+};
+
 export type AddPasswordAction = {
   type: 'ADD_PASSWORD',
   password: Password,
@@ -129,6 +133,7 @@ export type Action =
   | UpdateCryptedPasswordsAction
   | UnlockAppAction
   | UnlockAppFailAction
+  | LockAppAction
   | AddPasswordAction
   | UpdatePasswordAction
   | DeletePasswordAction

@@ -46,7 +46,7 @@ const StackNav = StackNavigator(
     },
     Edit: {
       screen: EditScreen,
-      navigationOptions: ({ navigation }: Object) => ({
+      navigationOptions: () => ({
         header: null,
       }),
     },

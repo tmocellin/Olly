@@ -14,6 +14,7 @@ export default {
   save: 'Save',
   // Unlock Screen
   unlock: 'Unlock',
+  lock: 'Lock',
   // Settings screen
   passwordAuto: 'Automatic generation',
   clear: 'Clear data',

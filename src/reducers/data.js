@@ -26,6 +26,8 @@ const dataState = (state: DataState = initialState, action: Action): DataState =
         ...state,
         error: action.error,
       };
+    case 'LOCK_APP':
+      return { ...state, passwords: { allIds: [], byId: {} }, key: '' };
     case 'ADD_PASSWORD':
       return {
         ...state,
