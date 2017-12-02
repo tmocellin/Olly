@@ -73,8 +73,8 @@ const Index = (props: Props) => {
 
 function mapStateToProps(state: ReduxState) {
   return {
-    isLoggedIn: state.synchronization.userLoggedToDropbox,
-    accessToken: state.synchronization.accessToken,
+    isLoggedIn: state.user.userLoggedToDropbox,
+    accessToken: state.user.accessToken,
     success: state.synchronization.success,
     message: state.synchronization.message,
     pendingAction: state.synchronization.pendingAction,

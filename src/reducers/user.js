@@ -11,6 +11,8 @@ const initialState: UserState = {
   salt: '',
   verificationToken: '',
   error: '',
+  accessToken: '',
+  userLoggedToDropbox: false,
 };
 
 const userState = (state: UserState = initialState, action: Action): UserState => {
@@ -26,6 +28,8 @@ const userState = (state: UserState = initialState, action: Action): UserState =
       };
     case 'INITIALIZATION_FAIL':
       return { ...state, error: action.error };
+    case 'SET_ACCESS_TOKEN':
+      return { ...state, userLoggedToDropbox: true, accessToken: action.token };
     default:
       return state;
   }

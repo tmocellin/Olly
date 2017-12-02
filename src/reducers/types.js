@@ -15,6 +15,8 @@ export type UserState = {
   +iv: string,
   +appInitialized: boolean,
   +error: string,
+  +userLoggedToDropbox: boolean,
+  +accessToken: string,
 };
 
 export type DataState = {
@@ -28,8 +30,6 @@ export type CryptedDataState = {
 };
 
 export type SynchronizationState = {
-  +userLoggedToDropbox: boolean,
-  +accessToken: string,
   +pendingAction: boolean,
   +message: string,
   +success: boolean,
