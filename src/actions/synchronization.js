@@ -127,6 +127,8 @@ export function DownloadData(
           dispatch(setPasswords(uncryptedPasswords));
           dispatch(updateCryptedPasswords(data.d));
           dispatch(dropboxActionSuccess(strings.dowloadSuccess));
+        } else {
+          dispatch(dropboxActionFail(strings.notSameVerification));
         }
       }
     } catch (error) {

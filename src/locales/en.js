@@ -35,7 +35,7 @@ export default {
   unHandled: 'An error has occurred. Try again later',
   notFound: 'No backup found',
   notSameVerification:
-    'The data password is not the same as the current . Unable to retrieve the data',
+    'The password of data is not the same as the current . Unable to retrieve the data',
   uploadSuccess: 'The data was saved on Dropbox successfully',
   dowloadSuccess: 'Data were successfully restore',
   deleteBackupSuccess: 'Your backup has been deleted successfully',
