@@ -19,6 +19,7 @@ export default {
   restore: 'Restore my data from DropBox',
   restoreDropBoxInstruction:
     'To be able to restore your data from DropBox you must enter the main password you entered during the first use of the application.',
+  restoreBtn: 'Restore',
   // Setup screen ,
   setup: 'Initialization',
   instructions:

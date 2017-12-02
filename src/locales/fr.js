@@ -20,6 +20,7 @@ export default {
   restore: 'Restaurer mes données depuis DropBox',
   restoreDropBoxInstruction:
     "Pour pouvoir restaurer vos données depuis DropBox vous devez saisir le mot de passe principale que vous avez saisie lors de la première utilisation de l'application.",
+  restoreBtn: 'Restaurer',
   // Setup screen ,
   setup: 'Initialisation',
   instructions:

@@ -35,7 +35,7 @@ export default (props: Props) => (
     {renderButtons(
       props.showButtons,
       () => props.navigation.navigate('Setup'),
-      () => props.navigation.navigate('Setup'),
+      () => props.navigation.navigate('Restore'),
     )}
   </View>
 );

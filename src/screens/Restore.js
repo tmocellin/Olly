@@ -5,27 +5,29 @@ import React, { Component } from 'react';
 import { View, Image, Button, Text, StyleSheet, Linking, Platform, ScrollView } from 'react-native'; // #1
 import uuidV4 from 'uuid/v4'; // #2
 import shittyQs from 'shitty-qs';
-import strings from '../../locales/strings';
-import { PRIMARY_TEXT, PRIMARY, WHITE } from '../../constants/colors';
-import NavBar from '../../components/NavBar';
+import strings from '../locales/strings';
+import { PRIMARY_TEXT, PRIMARY, WHITE } from '../constants/colors';
+import TextField from '../components/TextField';
 
 const appKey = 'puzyl8gt4mor5kp'; // #3
 
-const img = require('../../img/paper_plane.png');
+const img = require('../img/paper_plane.png');
 
 type Props = {
   navigation: Object,
-  setAccessToken: (token: string) => void,
+  actions: Object,
 };
 
 type State = {
   // #4
   verification: string,
+  password: string,
 };
 
 class Login extends Component<void, Props, State> {
   state = {
     verification: uuidV4(), // #5
+    password: '',
   };
 
   componentDidMount() {
@@ -40,11 +42,11 @@ class Login extends Component<void, Props, State> {
     const [, queryString] = event.url.match(/\#(.*)/);
     const query = shittyQs(queryString);
     if (this.state.verification === query.state) {
-      this.props.setAccessToken(query.access_token);
+      // RESTORE ACTION
     }
   }
 
-  logIn() {
+  restore() {
     // #6
     const redirectUri = Platform.OS === 'ios' ? 'olly://open' : 'https://www.olly.com/open';
 
@@ -56,15 +58,20 @@ class Login extends Component<void, Props, State> {
   render() {
     return (
       <View style={styles.container}>
-        <NavBar
-          title={strings.synchronization}
-          actionLeft={() => this.props.navigation.navigate('DrawerOpen')}
-        />
-        <ScrollView>
-          <View style={styles.subContainer}>
-            <Image source={img} />
-            <Text style={styles.title}> {strings.synchInstruction}</Text>
-            <Button title={strings.login} onPress={() => this.logIn()} color={PRIMARY} />
+        <ScrollView contentContainerStyle={styles.subContainer}>
+          <Image source={img} />
+          <Text style={styles.title}>{strings.restoreDropBoxInstruction}</Text>
+          <TextField
+            iconName="lock"
+            iosOutline
+            placeholder={strings.password}
+            secureTextEntry
+            value={this.state.password}
+            onChangeText={text => this.setState({ password: text })}
+            returnKeyType="done"
+          />
+          <View style={styles.submit}>
+            <Button title={strings.restore} onPress={() => this.restore()} color={PRIMARY} />
           </View>
         </ScrollView>
       </View>
@@ -91,5 +98,8 @@ const styles = StyleSheet.create({
     marginBottom: 32,
     textAlign: 'center',
     color: PRIMARY_TEXT,
+  },
+  submit: {
+    marginTop: 12,
   },
 });

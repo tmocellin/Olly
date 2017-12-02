@@ -11,6 +11,7 @@ import UnlockScreen from './Unlock';
 import SetupScreen from './Setup';
 import ReadOnlyScreen from './ReadOnly';
 import OnboardingScreen from './OnBoarding';
+import RestoreScreen from './Restore';
 import EditScreen from './Edit';
 
 const NestedNav = Platform.OS === 'android' ? DrawerNavigator : TabNavigator;
@@ -27,6 +28,14 @@ const StackNav = StackNavigator(
       screen: SetupScreen,
       navigationOptions: () => ({
         title: strings.setup,
+        headerStyle: { backgroundColor: '#01D88D' },
+        headerTintColor: 'white',
+      }),
+    },
+    Restore: {
+      screen: RestoreScreen,
+      navigationOptions: () => ({
+        title: strings.restore,
         headerStyle: { backgroundColor: '#01D88D' },
         headerTintColor: 'white',
       }),

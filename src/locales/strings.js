@@ -70,6 +70,7 @@ const AppString = {
   firstUse: I18n.t('firstUse'),
   restore: I18n.t('restore'),
   restoreDropBoxInstruction: I18n.t('restoreDropBoxInstruction'),
+  restoreBtn: I18n.t('restoreBtn'),
 };
 
 export default AppString;
