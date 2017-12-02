@@ -5,6 +5,20 @@ export default {
   addPassword: 'Add new password',
   search: 'Search',
   close: 'Close',
+  // Onboarding
+  welcomeTitle: 'Welcome',
+  welcomeDescription:
+    'Welcome in Olly yours secure password manager. Your passwords are encrypted by the AES-256 standard',
+  secureTitle: 'Strong passwords',
+  secureDescription:
+    'Create complex and secure passwords is no longer a problem . With Olly create them in one click',
+  backupTitle: 'Backup your data',
+  backupDescription: 'Thanks to DropBox you can backup all your data.',
+  getStartedTitle: 'Get started',
+  firstUse: 'First use',
+  restore: 'Restore my data from DropBox',
+  restoreDropBoxInstruction:
+    'To be able to restore your data from DropBox you must enter the main password you entered during the first use of the application.',
   // Setup screen ,
   setup: 'Initialization',
   instructions:

@@ -10,12 +10,19 @@ import strings from '../locales/strings';
 import UnlockScreen from './Unlock';
 import SetupScreen from './Setup';
 import ReadOnlyScreen from './ReadOnly';
+import OnboardingScreen from './OnBoarding';
 import EditScreen from './Edit';
 
 const NestedNav = Platform.OS === 'android' ? DrawerNavigator : TabNavigator;
 
 const StackNav = StackNavigator(
   {
+    Onboarding: {
+      screen: OnboardingScreen,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
     Setup: {
       screen: SetupScreen,
       navigationOptions: () => ({

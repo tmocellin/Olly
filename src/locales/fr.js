@@ -5,6 +5,21 @@ export default {
   addPassword: 'Ajouter un mot de passe',
   search: 'Rechercher',
   close: 'Fermer',
+  // Onboarding ,
+  welcomeTitle: 'Bienvenue',
+  welcomeDescription:
+    'Bienvenue dans Olly vôtre gestionnaire de mot de passe sécurisé. Vos mots de passe sont cryptés par le standard AES-256.',
+  secureTitle: 'Mot de passe fort',
+  secureDescription:
+    "Créer des mots de passe complexes et sécurisés n'est plus un problème. Avec Olly créé les en un clique.",
+  backupTitle: 'Sauvegarder vos données',
+  backupDescription:
+    "Grace à DropBox vous pouvez effectuer des sauvegardes de l'ensemble vos données. ",
+  getStartedTitle: 'Commencer',
+  firstUse: 'Première utilisation',
+  restore: 'Restaurer mes données depuis DropBox',
+  restoreDropBoxInstruction:
+    "Pour pouvoir restaurer vos données depuis DropBox vous devez saisir le mot de passe principale que vous avez saisie lors de la première utilisation de l'application.",
   // Setup screen ,
   setup: 'Initialisation',
   instructions:

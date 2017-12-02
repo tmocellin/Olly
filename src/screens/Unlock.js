@@ -44,7 +44,7 @@ class UnlockScreen extends Component<void, Props, State> {
     if (!this.props.appInitialized) {
       const resetAction = NavigationActions.reset({
         index: 0,
-        actions: [NavigationActions.navigate({ routeName: 'Setup' })],
+        actions: [NavigationActions.navigate({ routeName: 'Onboarding' })],
       });
       this.props.navigation.dispatch(resetAction);
     }

@@ -60,6 +60,16 @@ const AppString = {
   uploadSuccess: I18n.t('uploadSuccess'),
   dowloadSuccess: I18n.t('dowloadSuccess'),
   deleteBackupSuccess: I18n.t('deleteBackupSuccess'),
+  welcomeTitle: I18n.t('welcomeTitle'),
+  welcomeDescription: I18n.t('welcomeDescription'),
+  secureTitle: I18n.t('secureTitle'),
+  secureDescription: I18n.t('secureDescription'),
+  backupTitle: I18n.t('backupTitle'),
+  backupDescription: I18n.t('backupDescription'),
+  getStartedTitle: I18n.t('getStartedTitle'),
+  firstUse: I18n.t('firstUse'),
+  restore: I18n.t('restore'),
+  restoreDropBoxInstruction: I18n.t('restoreDropBoxInstruction'),
 };
 
 export default AppString;
