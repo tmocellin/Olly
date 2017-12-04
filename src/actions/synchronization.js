@@ -4,10 +4,13 @@
 import RNFetchBlob from 'react-native-fetch-blob';
 import CryptoJS from 'crypto-js';
 import Base64 from 'base-64';
-import { Decrypt } from '../common/CryptoHelper';
+import { Decrypt, IsValidPassword, GenerateKey } from '../common/CryptoHelper';
 import strings from '../locales/strings';
 import type { NormalizedState } from '../types/NormalizedState';
 import type {
+  RestoreFailAction,
+  RestoreSuccessAction,
+  RestoreStartAction,
   ThunkAction,
   Dispatch,
   SetAccessTokenAction,
@@ -17,6 +20,7 @@ import type {
   SetPasswordsAction,
   SetSettingsAction,
   UpdateCryptedPasswordsAction,
+  RestoreUserDataAction,
 } from './types';
 
 /*
@@ -137,6 +141,41 @@ export function DownloadData(
   };
 }
 
+export function RestoreData(token: string, password: string, resetAction: () => void): ThunkAction {
+  return async (dispatch: Dispatch) => {
+    dispatch(startRestoreAction(''));
+    dispatch(setAccessToken(token));
+    try {
+      const response = await RNFetchBlob.fetch(
+        'POST',
+        'https://content.dropboxapi.com/2/files/download',
+        {
+          Authorization: `Bearer ${token}`,
+          'Dropbox-API-Arg': '{"path": "/data_backup.json"}',
+        },
+      );
+      if (response.respInfo.status.toString() === '409') {
+        dispatch(restoreActionFail(strings.notFound));
+      } else if (response.respInfo.status.toString() !== '200') {
+        dispatch(restoreActionFail(strings.unHandled));
+      } else {
+        const data = JSON.parse(response.data);
+        if (IsValidPassword(data.vt, password, data.s)) {
+          dispatch(setSettings(data.st.passwordLength, data.st.autoGeneration));
+          dispatch(updateCryptedPasswords(data.d));
+          dispatch(restoreUserDataAction(data.s, data.v, data.vt));
+          dispatch(restoreActionSuccess(''));
+          resetAction();
+        } else {
+          dispatch(restoreActionFail(strings.invalid_password));
+        }
+      }
+    } catch (error) {
+      dispatch(restoreActionFail(error.toString()));
+    }
+  };
+}
+
 /*
 *** Actions Creator ***
 */
@@ -158,6 +197,32 @@ const dropboxActionSuccess = (info: string): DropboxSuccessAction => ({
 
 const dropboxActionFail = (error: string): DropboxFailAction => ({
   type: 'DROPBOX_ACTION_FAIL',
+  error,
+});
+
+const startRestoreAction = (info: string): RestoreStartAction => ({
+  type: 'RESTORE_ACTION_START',
+  info,
+});
+
+const restoreActionSuccess = (info: string): RestoreSuccessAction => ({
+  type: 'RESTORE_ACTION_SUCCESS',
+  info,
+});
+
+const restoreUserDataAction = (
+  salt: string,
+  iv: string,
+  verificationToken: string,
+): RestoreUserDataAction => ({
+  type: 'RESTORE_USER_DATA',
+  salt,
+  iv,
+  verificationToken,
+});
+
+const restoreActionFail = (error: string): RestoreFailAction => ({
+  type: 'RESTORE_ACTION_FAIL',
   error,
 });
 

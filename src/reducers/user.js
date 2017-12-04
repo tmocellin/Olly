@@ -30,6 +30,14 @@ const userState = (state: UserState = initialState, action: Action): UserState =
       return { ...state, error: action.error };
     case 'SET_ACCESS_TOKEN':
       return { ...state, userLoggedToDropbox: true, accessToken: action.token };
+    case 'RESTORE_USER_DATA':
+      return {
+        ...state,
+        iv: action.iv,
+        salt: action.salt,
+        verificationToken: action.verificationToken,
+        appInitialized: true,
+      };
     default:
       return state;
   }

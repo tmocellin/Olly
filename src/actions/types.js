@@ -121,6 +121,33 @@ export type DropboxFailAction = {
   error: string,
 };
 
+/*
+**************
+* Restoration
+**************
+*/
+export type RestoreStartAction = {
+  type: 'RESTORE_ACTION_START',
+  info: string,
+};
+
+export type RestoreSuccessAction = {
+  type: 'RESTORE_ACTION_SUCCESS',
+  info: string,
+};
+
+export type RestoreUserDataAction = {
+  type: 'RESTORE_USER_DATA',
+  salt: string,
+  iv: string,
+  verificationToken: string,
+};
+
+export type RestoreFailAction = {
+  type: 'RESTORE_ACTION_FAIL',
+  error: string,
+};
+
 export type Action =
   /** *** Settings **** */
   | SetPasswordLengthAction
@@ -143,4 +170,8 @@ export type Action =
   | SetAccessTokenAction
   | DropboxStartAction
   | DropboxSuccessAction
-  | DropboxFailAction;
+  | DropboxFailAction
+  | RestoreStartAction
+  | RestoreUserDataAction
+  | RestoreSuccessAction
+  | RestoreFailAction;

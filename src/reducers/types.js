@@ -35,10 +35,17 @@ export type SynchronizationState = {
   +success: boolean,
 };
 
+export type RestorationState = {
+  +pendingAction: boolean,
+  +message: string,
+  +success: boolean,
+};
+
 export type ReduxState = {
   +settings: SettingsState,
   +user: UserState,
   +data: DataState,
   +cryptedData: CryptedDataState,
   +synchronization: SynchronizationState,
+  +restore: RestorationState,
 };

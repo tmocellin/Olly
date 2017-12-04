@@ -2,31 +2,47 @@
 * @flow
 */
 import React, { Component } from 'react';
-import { View, Image, Button, Text, StyleSheet, Linking, Platform, ScrollView } from 'react-native'; // #1
-import uuidV4 from 'uuid/v4'; // #2
+import {
+  View,
+  Image,
+  Button,
+  Text,
+  StyleSheet,
+  Linking,
+  Platform,
+  ScrollView,
+  ActivityIndicator,
+} from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import uuidV4 from 'uuid/v4';
 import shittyQs from 'shitty-qs';
+import { NavigationActions } from 'react-navigation';
 import strings from '../locales/strings';
-import { PRIMARY_TEXT, PRIMARY, WHITE } from '../constants/colors';
+import { PRIMARY_TEXT, PRIMARY, WHITE, DELETE_COLOR } from '../constants/colors';
 import TextField from '../components/TextField';
+import * as SynchronizationActions from '../actions/synchronization';
+import type { ReduxState } from '../reducers/types';
 
-const appKey = 'puzyl8gt4mor5kp'; // #3
+const appKey = 'puzyl8gt4mor5kp';
 
 const img = require('../img/paper_plane.png');
 
 type Props = {
   navigation: Object,
   actions: Object,
+  msg: string,
+  pendingAction: boolean,
 };
 
 type State = {
-  // #4
   verification: string,
   password: string,
 };
 
 class Login extends Component<void, Props, State> {
   state = {
-    verification: uuidV4(), // #5
+    verification: uuidV4(),
     password: '',
   };
 
@@ -42,17 +58,36 @@ class Login extends Component<void, Props, State> {
     const [, queryString] = event.url.match(/\#(.*)/);
     const query = shittyQs(queryString);
     if (this.state.verification === query.state) {
-      // RESTORE ACTION
+      const resetAction = NavigationActions.reset({
+        index: 0,
+        actions: [NavigationActions.navigate({ routeName: 'Unlock' })],
+      });
+      const reset = () => this.props.navigation.dispatch(resetAction);
+      this.props.actions.RestoreData(query.access_token, this.state.password, reset);
     }
   }
 
   restore() {
-    // #6
     const redirectUri = Platform.OS === 'ios' ? 'olly://open' : 'https://www.olly.com/open';
 
     const url = `https://www.dropbox.com/oauth2/authorize?response_type=token&client_id=${appKey}&redirect_uri=${redirectUri}&state=${this
       .state.verification}`;
     Linking.openURL(url).catch(err => console.error('An error occurred', err));
+  }
+
+  renderAction(pending: boolean) {
+    if (pending) {
+      return (
+        <View style={styles.submit}>
+          <ActivityIndicator size="large" color={PRIMARY} animating />
+        </View>
+      );
+    }
+    return (
+      <View style={styles.submit}>
+        <Button title={strings.restore} onPress={() => this.restore()} color={PRIMARY} />
+      </View>
+    );
   }
 
   render() {
@@ -62,7 +97,7 @@ class Login extends Component<void, Props, State> {
           <Image source={img} />
           <Text style={styles.title}>{strings.restoreDropBoxInstruction}</Text>
           <TextField
-            iconName="lock"
+            icon="lock"
             iosOutline
             placeholder={strings.password}
             secureTextEntry
@@ -70,16 +105,23 @@ class Login extends Component<void, Props, State> {
             onChangeText={text => this.setState({ password: text })}
             returnKeyType="done"
           />
-          <View style={styles.submit}>
-            <Button title={strings.restore} onPress={() => this.restore()} color={PRIMARY} />
-          </View>
+          {this.renderAction(this.props.pendingAction)}
+          <Text style={{ color: DELETE_COLOR }}>{this.props.msg}</Text>
         </ScrollView>
       </View>
     );
   }
 }
 
-export default Login;
+function mapStateToProps(state: ReduxState) {
+  return {
+    msg: state.restore.message,
+    pendingAction: state.restore.pendingAction,
+  };
+}
+export default connect(mapStateToProps, dispatch => ({
+  actions: bindActionCreators(SynchronizationActions, dispatch),
+}))(Login);
 
 const styles = StyleSheet.create({
   container: {
@@ -100,6 +142,8 @@ const styles = StyleSheet.create({
     color: PRIMARY_TEXT,
   },
   submit: {
-    marginTop: 12,
+    marginVertical: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

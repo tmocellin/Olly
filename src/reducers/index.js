@@ -8,6 +8,7 @@ import user from './user';
 import cryptedData from './cryptedData';
 import data from './data';
 import synchronization from './synchronization';
+import restore from './restore';
 
 const rootReducer = combineReducers({
   settings,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   cryptedData,
   data,
   synchronization,
+  restore,
 });
 
 export default rootReducer;
