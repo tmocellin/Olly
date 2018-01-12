@@ -10,7 +10,7 @@ You can also download the final from app stores :
 [WebSite](https://olly.dwastudio.fr/)
 
 <img src="/doc/unlock-en.png" alt="alt text" width="325" height="667">
-<img src="/doc/password-en.png" alt="alt text" width="325" height="667">
+<img src="/doc/password-list-en.png" alt="alt text" width="325" height="667">
 
 <img src="/doc/settings-en.png" alt="alt text" width="325" height="667">
 <img src="/doc/synchronization-en.png" alt="alt text" width="325" height="667">
